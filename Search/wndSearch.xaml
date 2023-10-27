@@ -7,6 +7,140 @@
         mc:Ignorable="d"
         Title="wndSearch" Height="450" Width="800">
     <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Black" VerticalAlignment="Top" Width="800" Margin="0,48,0,0"/>
+        <Label Content="Search" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" Height="40" Width="62"/>
+        <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="31,85,578,35" Foreground="#FFAD2E2E">
+            <ListBox Name="InvoiceListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+                <ListBoxItem>Invoice</ListBoxItem>
+
+            </ListBox>
+        </ScrollViewer>
+        <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="491,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Invoice Date:" HorizontalAlignment="Left" Margin="491,136,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="626,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="626,140,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content=" Clear " HorizontalAlignment="Left" Margin="491,389,0,0" VerticalAlignment="Top"/>
+        <Button Content=" Search " HorizontalAlignment="Left" Margin="588,389,0,0" VerticalAlignment="Top"/>
+        <Button Content="  Edit  " HorizontalAlignment="Left" Margin="686,389,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="TotalChargesComboBox" Margin="626,183,77,203">
+            <ComboBoxItem>Option 1</ComboBoxItem>
+            <ComboBoxItem>Option 2</ComboBoxItem>
+            <ComboBoxItem>Option 3</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Total Charges" HorizontalAlignment="Left" Margin="491,181,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="611,258,81,67" Foreground="#FFAD2E2E">
+            <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+                <ListBoxItem>Item</ListBoxItem>
+            </ListBox>
+        </ScrollViewer>
+        <Label Content="Items: " HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top"/>
+        <Label Content="INVOICES: " HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top"/>
+        <!-- 
         
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBoxItem>Item 1</ListBoxItem>
+            <ListBoxItem>Item 2</ListBoxItem>
+            <ListBoxItem>Item 3</ListBoxItem>
+            </ListBox>
+            </ScrollViewer>
+
+        -->
     </Grid>
 </Window>
