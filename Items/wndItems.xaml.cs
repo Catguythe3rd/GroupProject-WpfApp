@@ -22,6 +22,7 @@ namespace GroupProject_WpfApp.Items
         public wndItems()
         {
             InitializeComponent();
+            // text comments
         }
 
         private void updateLabels()
