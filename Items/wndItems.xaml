@@ -6,66 +6,105 @@
         xmlns:local="clr-namespace:GroupProject_WpfApp.Items"
         mc:Ignorable="d"
         Title="Defenition Table" Height="450" Width="800">
+    
+    <!-- This handles the style of the grid-space buttons-->
+    <Window.Resources>
+        <Style x:Key = "Column1ButtonStyle" TargetType = "Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="15*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
-            <GroupBox Header="Items" Margin="0,10,0,0">
+        <!-- 1st Column - Buttons-->
+        <Grid Grid.Column="0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <Button Content="New" Style = "{StaticResource Column1ButtonStyle}" Margin="0,50,0,10"/>
+                <Button Content="Delete" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,40"/>
+
+                <Button Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10">
+                    <Path Stroke="Black" Data="M 0 8 L 8 0 L 16 8 "/>
+                    <!--(0,0) is in the top left. Pos x is down, pos y is right. Its called "Path Markup Syntax"-->
+                </Button>
+
+                <Button Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10">
+                    <Path Stroke="Black" Data="M 0 0 L 8 8 L 16 0 "/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- 2nd Column Table-->
+        <Grid Grid.Column="1">
+            <GroupBox Header="Table" Margin="0,10,0,10">
                 <DataGrid Margin="0,10,0,0" d:ItemsSource="{d:SampleData ItemCount=5}"/>
             </GroupBox>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="New" Height="30" Width="71" Margin="30,0,0,0"/>
-                <Button Content="Save" Height="30" Width="71" Margin="30,0,0,0"/>
-                <Button Content="Delete" Height="30" Width="71" Margin="30,0,0,0"/>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="2">
-            <GroupBox Header="Items" Margin="0,10,0,0">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-                        <Button Content="^" Height="30" Width="71" Margin="0,0,0,30"/>
-                        <Button Content="(down)" Height="30" Width="71"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Code: "/>
-                            <TextBox Text="002"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Cost: "/>
-                            <TextBox Text="$1000"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Name: "/>
-                            <TextBox Text="Big Horse"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Description: "/>
-                            <TextBox Text="its a really big horse"/>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <GroupBox Header="Item Search" Margin="0,10,0,0">
+        <!-- 3nrd Column Edit and Search-->
+        <Grid Grid.Column="2">
+            <StackPanel Orientation="Vertical">
                 
-            </GroupBox>
+                <!-- Edit Box-->
+                <GroupBox Header="Edit" Margin="10,10,10,10">
+                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID:"/>
+                            <Label Content="#000001"/>
+                            <Label Content="Cost:" Margin="10,0,0,0"/>
+                            <TextBox Text="$1000" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Name:"/>
+                            <TextBox Text="Big Horse" Margin="28,4,0,0" Width="225"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Description:" Margin="0,-7,0,0" />
+                            <TextBox Text="its a really big horse" Width="225" Height="85"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Save" Height="20" Width="40" FontSize="12" Margin="15,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Search Box -->
+                <GroupBox Header="Search" Margin="10,10,10,10">
+                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID:"/>
+                            <TextBox Text="#000001" Margin="0,4,0,0"/>
+                            <Label Content="Cost:" Margin="10,0,0,0"/>
+                            <TextBox Text="$1000" Margin="0,4,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Name:"/>
+                            <TextBox Text="Big Horse" Margin="28,4,0,0" Width="225"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Description:" Margin="0,-7,0,0" />
+                            <TextBox Text="its a really big horse" Width="225" Height="85"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Search" Height="20" Width="50" FontSize="12" Margin="12,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

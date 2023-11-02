@@ -51,5 +51,13 @@ namespace GroupProject_WpfApp.Items
         {
             // iterate down through list, store the selected item in some sort of variable.
         }
+
+        void deleteItem()
+        {
+            // From commonly missed items - Items
+            //  - When deleting an item on the def table form,
+            //  a requirement says “Instead warn them with a message that tells the user which invoices that item is used on.”.
+            //  Your message doesn’t tell which invoices it is on.
+        }
     }
 }
