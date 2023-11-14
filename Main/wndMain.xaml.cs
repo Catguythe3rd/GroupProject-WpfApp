@@ -66,7 +66,7 @@ namespace GroupProject_WpfApp.Main
             this.Hide();
         
             //open items page
-            itemWindow.ShowDialog();
+            itemWindow.Show();
             this.Show();
         }
 
@@ -81,7 +81,7 @@ namespace GroupProject_WpfApp.Main
             
             
             this.Hide();
-            searchWindow.ShowDialog();
+            searchWindow.Show();
             this.Show();
             //hide main
             //open search page
