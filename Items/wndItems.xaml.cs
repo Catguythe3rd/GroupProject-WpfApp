@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,11 @@ namespace GroupProject_WpfApp.Items
         public wndItems()
         {
             InitializeComponent();
-            // text comments
+
+            // This code is for database texting purposes.
+            clsDataAccess dataBase = new clsDataAccess();
+            int iRef = 0;
+            DataSet dataSet = dataBase.ExecuteSQLStatement("SELECT Flight_ID, Flight_Number, Aircraft_Type FROM FLIGHT", ref iRef);
         }
 
         private void updateLabels()
