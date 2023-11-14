@@ -20,7 +20,7 @@ using System.Reflection;
 		public clsDataAccess()
         {
             // Mathieu Comment - Directory.GetCurrentDirectory() always checks in bin/debug/net6.0-windows to look for the database for some reason. 
-            sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Directory.GetCurrentDirectory() + "\\ReservationSystem.accdb";
+            sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Directory.GetCurrentDirectory() + "\\Invoice.accdb";
         }
 
         /// <summary>
