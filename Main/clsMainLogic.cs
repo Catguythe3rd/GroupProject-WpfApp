@@ -14,9 +14,6 @@ namespace GroupProject_WpfApp.Main
 
         #region items
 
-        bool isValidCost;
-        bool isValidName;
-        bool isValidDescription;
         clsMainLogic()
         {
             items = new List<clsItem>(); // create new list
