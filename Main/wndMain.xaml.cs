@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GroupProject_WpfApp.Items;
+using GroupProject_WpfApp.Search;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,16 @@ namespace GroupProject_WpfApp.Main
     /// </summary>
     public partial class wndMain : Window
     {
+        #region windows
+        wndItems itemWindow;
+        wndSearch searchWindow;
+        #endregion
         public wndMain()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            searchWindow = new wndSearch(); 
+            itemWindow = new wndItems();
             //InvoiceList();
             Example();
         }
@@ -54,7 +63,11 @@ namespace GroupProject_WpfApp.Main
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
             //hide main
+            this.Hide();
+        
             //open items page
+            itemWindow.Show();
+            this.Show();
         }
 
         /// <summary>
@@ -64,6 +77,12 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
+
+            
+            
+            this.Hide();
+            searchWindow.Show();
+            this.Show();
             //hide main
             //open search page
 
