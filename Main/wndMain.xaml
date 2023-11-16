@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GroupProject_WpfApp.Main"
         mc:Ignorable="d"
         Title="wndMain" Height="450" Width="800">
-    <Grid>
+    <Grid Background="RoyalBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
@@ -31,9 +31,17 @@
             </Grid>
 
         </GroupBox>
-        <DataGrid x:Name="invoice_List" Grid.Row="1"  BorderBrush="Black" BorderThickness="2" Margin="10,10,10,10" />
-        <GroupBox Header="Invoice" Grid.Column="1" Margin="10,10,10,10" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+        <DataGrid x:Name="invoice_List" Grid.Row="1"  BorderBrush="Gold" BorderThickness="5" Margin="10,10,10,10" />
+        <Border Grid.Column="1" Margin="10,10,10,10" Grid.Row="1" BorderBrush="Gold" BorderThickness="2" Background="White">
             <Grid x:Name="invoiceBox">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FEF7E6C4" Offset="0"/>
+                        <GradientStop Color="#FEFDEACB" Offset="0.976"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="25*"/>
@@ -70,7 +78,7 @@
                 <Button x:Name="SelectButton" Grid.Column="2" Content="Select" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="72" Click="SelectButton_Click"/>
 
             </Grid>
-        </GroupBox>
+        </Border>
 
 
     </Grid>
