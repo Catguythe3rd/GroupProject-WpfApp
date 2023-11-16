@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace GroupProject_WpfApp.Main
@@ -37,8 +38,7 @@ namespace GroupProject_WpfApp.Main
 
         private void InvoiceList()
         {
-
-            invoice_List.DataContext = mainInventory.getAllInvoices();
+            invoice_List.ItemsSource = mainInventory.getAllInvoices() ;
             //ItemDropDown.Items.Add(item name, item cost)
         }
 
