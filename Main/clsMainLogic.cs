@@ -9,6 +9,33 @@ namespace GroupProject_WpfApp.Main
 {
     internal class clsMainLogic
     {
-       
+        private int invoiceNum;
+        private DateOnly invoiceDate;
+        private float invoiceTotal;
+
+        public int ID
+        {
+            get { return invoiceNum; }
+            set { invoiceNum = value; }
+
+        }
+        public DateOnly InvoiceDate
+        {
+            get { return invoiceDate; }
+            set { invoiceDate = value; }
+        }
+
+        public float InvoiceTotal
+        {
+            get { return invoiceTotal; }
+            set { invoiceTotal = value; }
+        }
+
+
+        public override string ToString()
+        {
+            return "ID: "+ID.ToString() + " Date:" + invoiceDate + " Total: $" + invoiceTotal;
+        }
+
     }
 }

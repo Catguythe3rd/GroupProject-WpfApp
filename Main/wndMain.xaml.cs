@@ -24,6 +24,7 @@ namespace GroupProject_WpfApp.Main
         #region windows
         wndItems itemWindow;
         wndSearch searchWindow;
+        clsMainSQL mainInventory;
         #endregion
         public wndMain()
         {
@@ -31,27 +32,14 @@ namespace GroupProject_WpfApp.Main
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             searchWindow = new wndSearch(); 
             itemWindow = new wndItems();
-            //InvoiceList();
-            Example();
-        }
-
-        public int Example()
-        {
-
-            for (int i = 0; i < 100; i++)
-            {
-
-                invoice_List.Items.Add("Item " + i.ToString());
-                ItemDropDown.Items.Add("Item " + i.ToString());
-            }
-
-
-            return 0;
+            InvoiceList();
         }
 
         private void InvoiceList()
         {
-            //invoice_List.Items.Add(item id, item description, item cost)
+
+            List<clsMainLogic> invoices = mainInventory.getAllInvoices();
+            invoice_List.Items.Add(invoices.ToString());
             //ItemDropDown.Items.Add(item name, item cost)
         }
 
