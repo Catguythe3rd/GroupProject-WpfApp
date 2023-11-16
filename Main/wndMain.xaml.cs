@@ -38,8 +38,7 @@ namespace GroupProject_WpfApp.Main
         private void InvoiceList()
         {
 
-            List<clsMainLogic> invoices = mainInventory.getAllInvoices();
-            invoice_List.Items.Add(invoices.ToString());
+            invoice_List.DataContext = mainInventory.getAllInvoices();
             //ItemDropDown.Items.Add(item name, item cost)
         }
 
