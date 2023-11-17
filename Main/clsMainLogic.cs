@@ -11,7 +11,7 @@ namespace GroupProject_WpfApp.Main
     {
         private int invoiceNum;
         private DateOnly invoiceDate;
-        private float invoiceTotal;
+        private decimal invoiceTotal;
 
         public int ID
         {
@@ -25,7 +25,7 @@ namespace GroupProject_WpfApp.Main
             set { invoiceDate = value; }
         }
 
-        public float InvoiceTotal
+        public decimal InvoiceTotal
         {
             get { return invoiceTotal; }
             set { invoiceTotal = value; }

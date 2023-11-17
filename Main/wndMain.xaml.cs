@@ -28,18 +28,25 @@ namespace GroupProject_WpfApp.Main
         clsMainSQL mainInventory;
         #endregion
         public wndMain()
-        {
+
+        { //start window
             InitializeComponent();
+            //show other windows
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+           
             searchWindow = new wndSearch(); 
             itemWindow = new wndItems();
+            //put info into invoice and invenotry list/drop down
             InvoiceList();
         }
 
+        /// <summary>
+        /// binds information to invoice_list and ditmeDropDown
+        /// </summary>
         private void InvoiceList()
         {
             invoice_List.ItemsSource = mainInventory.getAllInvoices() ;
-            //ItemDropDown.Items.Add(item name, item cost)
+            ItemDropDown.ItemsSource = mainInventory.getAllItems();
         }
 
         /// <summary>
@@ -91,6 +98,9 @@ namespace GroupProject_WpfApp.Main
             //show Tax Cost
             //show Total Cost
 
+            //call newInvoice()
+            InvoiceList();
+
         }
 
         /// <summary>
@@ -106,7 +116,7 @@ namespace GroupProject_WpfApp.Main
             //show items list label
             //show items list drop down
 
-
+            //call information from selected invoice getONEInvoice()
 
         }
 
