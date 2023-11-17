@@ -20,14 +20,13 @@ namespace GroupProject_WpfApp.Items
     /// </summary>
     public partial class wndItems : Window
     {
+        clsItemsSQL clsItemsSQL;
+
         public wndItems()
         {
             InitializeComponent();
-
-            // This code is for database texting purposes.
-            clsDataAccess dataBase = new clsDataAccess();
-            int iRef = 0;
-            DataSet dataSet = dataBase.ExecuteSQLStatement("select ItemCode, ItemDesc, Cost from ItemDesc", ref iRef);
+            clsItemsSQL = new clsItemsSQL();
+            updateDataGrid();
         }
 
         private void updateLabels()
@@ -37,7 +36,7 @@ namespace GroupProject_WpfApp.Items
 
         private void updateDataGrid()
         {
-
+            itemsTable_DataGrid.ItemsSource = clsItemsSQL.getItems(); // this doesn't work yet.
         }
     }
 }

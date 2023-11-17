@@ -8,27 +8,16 @@ namespace GroupProject_WpfApp.Items
 {
     public class clsItem
     {
-        string name;
-        string description;
-        float cost;
-        int IDcode;
+        public string ItemCode;
+        public string ItemDesc;
+        public decimal cost;
 
-        clsItem(string name, string description, float cost, int iDcode)
+        public clsItem(string ItemCode, string ItemDesc, decimal cost)
         {
-            this.name = name;
-            this.description = description;
+
+            this.ItemCode = ItemCode;
+            this.ItemDesc = ItemDesc;
             this.cost = cost;
-            this.IDcode = iDcode;
-        }
-
-        private void SQL_get()
-        {
-            // get values from sql data base and save them into this object.
-        }
-
-        private void SQL_set()
-        {
-            // set values from sql data base as the values in this object.
         }
     }
 }
