@@ -1,4 +1,5 @@
 ﻿using GroupProject_WpfApp.Items;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -73,7 +74,6 @@ namespace GroupProject_WpfApp.Main
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             int iRet = 0;
-            lstInvoices = new List<clsMainLogic>();
 
             ds = db.ExecuteSQLStatement("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)", ref iRet);
 
@@ -106,5 +106,49 @@ namespace GroupProject_WpfApp.Main
         }
 
 
+        public List<clsItem> getONEItem()
+        { 
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0;
+            lstItems = new List<clsItem>();
+            
+            ds = db.ExecuteSQLStatement("SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = 5000", ref iRet);
+            
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                string ItemCode = dr[0].ToString();
+                string ItemDesc = dr[1].ToString();
+                decimal cost = decimal.Parse(dr[2].ToString());
+            
+                clsItem item = new clsItem(ItemCode, ItemDesc, cost);
+            
+            
+            
+                lstItems.Add(item);
+            
+            }
+            return lstItems;
+            
+        } 
+
+        public void DeleteInvoice()
+        {
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0; 
+
+            ds = db.ExecuteSQLStatement("DELETE FROM LineItems WHERE InvoiceNum = 5000", ref iRet);
+        }
+
+        public void editInvoice()
+        {
+            
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0;
+
+            ds = db.ExecuteSQLStatement("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 123", ref iRet);
+        }
     }
 }

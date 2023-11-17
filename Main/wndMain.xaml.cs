@@ -91,7 +91,6 @@ namespace GroupProject_WpfApp.Main
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
 
-            //create new invoice obj
 
             //show new invoice number
             //show current Cost
@@ -116,7 +115,8 @@ namespace GroupProject_WpfApp.Main
             //show items list label
             //show items list drop down
 
-            //call information from selected invoice getONEInvoice()
+            //getONEInvoice()
+            //populate information to invoice box
 
         }
 
@@ -127,7 +127,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            //Grab item number
+            //Grab item number getONEItem()
             //add item Description and cost it ItemsList
         }
 
@@ -138,11 +138,17 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            //save invoice date to invoice obj 
+
+
+            //save itemsList to invoice obj
+            //save Cost to invoice obj
+            //save Tax to invoice obj
+            //save Total Cost to invoice obj
             //upload invoice date to invoice obj
-            //upload itemsList to invoice obj
-            //upload Cost to invoice obj
-            //upload Tax to invoice obj
-            //upload Total Cost to invoice obj
+            //if new: newInvoice()
+            //if edit: editInvoice()
+
             //hide all invoice buttons
 
         }
