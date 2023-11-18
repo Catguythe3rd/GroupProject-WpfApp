@@ -114,20 +114,28 @@ namespace GroupProject_WpfApp.Main
         }
 
         /// <summary>
-        /// edit selected invoice
+        /// edit selected invoice. Doesn't work yet 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            //show save button
-            //show select button
-            //show delete button
-            //show items list label
-            //show items list drop down
+            if (invoice_List.SelectedIndex == null) return;
+            else
+            {
+                //grab invoice info
+                int idNum = invoice_List.SelectedIndex;
+                idNum += 5000;
+                List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
+                //show save button
+                //show select button
+                //show delete button
+                //show items list label
+                //show items list drop down
+                mainInventory.editInvoice(myInvoice[0].ID); //not working yet
+            }
 
-            //getONEInvoice()
-            //populate information to invoice box
+
 
         }
 
@@ -164,6 +172,8 @@ namespace GroupProject_WpfApp.Main
 
             //hide all invoice buttons
 
+            mainInventory.newInvoice(); //doesn't  work yet.
+
         }
 
         /// <summary>
@@ -173,7 +183,8 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            //delete selected Items from Items List
+            //collect selected items id
+            mainInventory.DeleteItemFromInvoice(); 
         }
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)

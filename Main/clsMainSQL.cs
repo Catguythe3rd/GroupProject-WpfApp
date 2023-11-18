@@ -68,18 +68,18 @@ namespace GroupProject_WpfApp.Main
         }
         
         
-        //public void newInvoice()
-        //{
-        //    clsDataAccess db = new clsDataAccess();
-        //    DataSet ds = new DataSet();
-        //    int iRet = 0;
-        //
-        //    ds = db.ExecuteSQLStatement("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)", ref iRet);
-        //
-        //    
-        //}
-        //
-        //
+        public void newInvoice()
+        {
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0;
+        
+            ds = db.ExecuteSQLStatement("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)", ref iRet);
+        
+            
+        }
+        
+        
          public List<clsMainLogic> getOneInvoice(int id)
          {
              clsDataAccess db = new clsDataAccess();
@@ -131,24 +131,24 @@ namespace GroupProject_WpfApp.Main
         //    
         //} 
         //
-        //public void DeleteInvoice()
-        //{
-        //    clsDataAccess db = new clsDataAccess();
-        //    DataSet ds = new DataSet();
-        //    int iRet = 0; 
+        public void DeleteItemFromInvoice()
+        {
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0; 
+        
+            ds = db.ExecuteSQLStatement("DELETE FROM LineItems WHERE InvoiceNum = 5000", ref iRet);
+        }
         //
-        //    ds = db.ExecuteSQLStatement("DELETE FROM LineItems WHERE InvoiceNum = 5000", ref iRet);
-        //}
-        //
-        //public void editInvoice()
-        //{
-        //    
-        //    clsDataAccess db = new clsDataAccess();
-        //    DataSet ds = new DataSet();
-        //    int iRet = 0;
-        //
-        //    ds = db.ExecuteSQLStatement("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 123", ref iRet);
-        //}
+        public void editInvoice(int num)
+        {
+            
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0;
+        
+            ds = db.ExecuteSQLStatement("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 5000", ref iRet);
+        }
         #endregion
     }
 }
