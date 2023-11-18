@@ -66,8 +66,8 @@ namespace GroupProject_WpfApp.Main
         
             return listItems;
         }
-        //
-        //
+        
+        
         //public void newInvoice()
         //{
         //    clsDataAccess db = new clsDataAccess();
@@ -80,29 +80,29 @@ namespace GroupProject_WpfApp.Main
         //}
         //
         //
-        //public List<clsMainLogic> getOneInvoice()
-        //{
-        //    clsDataAccess db = new clsDataAccess();
-        //    DataSet ds = new DataSet();
-        //    int iRet = 0;
-        //    lstInvoices = new List<clsMainLogic>();
-        //
-        //    ds = db.ExecuteSQLStatement("SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = 5000", ref iRet);
-        //
-        //    foreach (DataRow dr in ds.Tables[0].Rows)
-        //    {
-        //
-        //        clsMainLogic Invoice = new clsMainLogic();
-        //        Invoice.ID = int.Parse(dr[0].ToString());
-        //        Invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
-        //        Invoice.InvoiceTotal = decimal.Parse(dr[2].ToString());
-        //
-        //
-        //        lstInvoices.Add(Invoice);
-        //
-        //    }
-        //    return lstInvoices;
-        //}
+         public List<clsMainLogic> getOneInvoice(int id)
+         {
+             clsDataAccess db = new clsDataAccess();
+             DataSet ds = new DataSet();
+             int iRet = 0;
+             lstInvoices = new List<clsMainLogic>();
+         
+             ds = db.ExecuteSQLStatement("SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = "+ id, ref iRet);
+         
+             foreach (DataRow dr in ds.Tables[0].Rows)
+             {
+         
+                 clsMainLogic Invoice = new clsMainLogic();
+                 Invoice.ID = int.Parse(dr[0].ToString());
+                 Invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
+                 Invoice.InvoiceTotal = decimal.Parse(dr[2].ToString());
+         
+         
+                 lstInvoices.Add(Invoice);
+         
+             }
+             return lstInvoices;
+         }
         //
         //
         //public List<clsItem> getONEItem()

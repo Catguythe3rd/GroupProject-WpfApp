@@ -37,5 +37,13 @@ namespace GroupProject_WpfApp.Main
             return "ID: "+ ID.ToString() + " Date:" + invoiceDate.ToString() + " Total: $" + invoiceTotal.ToString();
         }
 
+        public decimal Tax(decimal cost)
+        { 
+            decimal salesTax= 0.05m;
+            decimal tax = decimal.Multiply(cost, salesTax);
+
+            return tax;
+        }
+
     }
 }

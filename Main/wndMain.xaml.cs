@@ -26,6 +26,7 @@ namespace GroupProject_WpfApp.Main
         wndItems itemWindow;
         wndSearch searchWindow;
         clsMainSQL mainInventory;
+        clsMainLogic mainLogic;
         clsDataAccess db;
         #endregion
         public wndMain()
@@ -49,10 +50,8 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         private void InvoiceList()
         {
-            // List<clsMainLogic> invoices = mainInventory.getAllInvoices();
-
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
-            ItemDropDown.ItemsSource = mainInventory.getAllItems();
+            ItemDropDown.ItemsSource = mainInventory.getAllItems();//fix doesn't populate properly
         }
 
         /// <summary>
@@ -96,15 +95,21 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-
-
+            List<clsMainLogic> lastInvoice = mainInventory.getAllInvoices();
+            int id =0;
+            for(int i = 0; i < lastInvoice.Count; i++)
+            {
+                id = lastInvoice[i].ID;
+            }
+            id++;
             //show new invoice number
+            invoiceNum.Content = id;
             //show current Cost
+            CostNum.Content = 0;
             //show Tax Cost
+            taxNum.Content = 0;
             //show Total Cost
-
-            //call newInvoice()
-            InvoiceList();
+            TotalCostNum.Content = 0;
 
         }
 
@@ -169,6 +174,21 @@ namespace GroupProject_WpfApp.Main
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             //delete selected Items from Items List
+        }
+
+        private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int idNum = invoice_List.SelectedIndex;
+            idNum+=5000;
+            List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
+            decimal cost = 0;
+            decimal tax = 0;
+            invoiceNum.Content = myInvoice[0].ID;
+            InvoiceDateBox.Text = myInvoice[0].InvoiceDate.ToString();
+            CostNum.Content = 0;//to be updated once items are fixed.
+            ItemsList.Items.Add("string");//update with getOneitems
+            taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
+            TotalCostNum.Content = myInvoice[0].InvoiceTotal.ToString();
         }
     }
 }
