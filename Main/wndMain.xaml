@@ -16,7 +16,7 @@
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Header="" VerticalAlignment="Top" HorizontalAlignment="Left" Height="50" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="White">
+        <GroupBox Header="" VerticalAlignment="Top" HorizontalAlignment="Left" Height="50" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>

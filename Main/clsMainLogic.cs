@@ -9,9 +9,9 @@ namespace GroupProject_WpfApp.Main
 {
     internal class clsMainLogic
     {
-        private int invoiceNum;
-        private DateOnly invoiceDate;
-        private decimal invoiceTotal;
+        private int invoiceNum = 0;
+        private DateTime invoiceDate = DateTime.Now;
+        private decimal invoiceTotal = 0;
 
         public int ID
         {
@@ -19,7 +19,7 @@ namespace GroupProject_WpfApp.Main
             set { invoiceNum = value; }
 
         }
-        public DateOnly InvoiceDate
+        public DateTime InvoiceDate
         {
             get { return invoiceDate; }
             set { invoiceDate = value; }
@@ -34,7 +34,7 @@ namespace GroupProject_WpfApp.Main
 
         public override string ToString()
         {
-            return "ID: "+ID.ToString() + " Date:" + invoiceDate + " Total: $" + invoiceTotal;
+            return "ID: "+ ID.ToString() + " Date:" + invoiceDate.ToString() + " Total: $" + invoiceTotal.ToString();
         }
 
     }

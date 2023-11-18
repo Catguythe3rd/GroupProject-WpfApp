@@ -26,6 +26,7 @@ namespace GroupProject_WpfApp.Main
         wndItems itemWindow;
         wndSearch searchWindow;
         clsMainSQL mainInventory;
+        clsDataAccess db;
         #endregion
         public wndMain()
 
@@ -36,8 +37,11 @@ namespace GroupProject_WpfApp.Main
            
             searchWindow = new wndSearch(); 
             itemWindow = new wndItems();
+            mainInventory = new clsMainSQL();
             //put info into invoice and invenotry list/drop down
             InvoiceList();
+
+            
         }
 
         /// <summary>
@@ -45,7 +49,9 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         private void InvoiceList()
         {
-            invoice_List.ItemsSource = mainInventory.getAllInvoices() ;
+            // List<clsMainLogic> invoices = mainInventory.getAllInvoices();
+
+            invoice_List.ItemsSource = mainInventory.getAllInvoices();
             ItemDropDown.ItemsSource = mainInventory.getAllItems();
         }
 
@@ -128,6 +134,7 @@ namespace GroupProject_WpfApp.Main
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             //Grab item number getONEItem()
+            
             //add item Description and cost it ItemsList
         }
 
@@ -147,6 +154,7 @@ namespace GroupProject_WpfApp.Main
             //save Total Cost to invoice obj
             //upload invoice date to invoice obj
             //if new: newInvoice()
+            //List<clsMainLogic> newInvoice = mainInventory.getOneInvoice();
             //if edit: editInvoice()
 
             //hide all invoice buttons
