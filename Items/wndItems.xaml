@@ -43,17 +43,12 @@
         <!-- 2nd Column Table-->
         <Grid Grid.Column="1">
             <GroupBox Header="Items Table" FontSize="16" Margin="0,10,0,10">
-                <DataGrid x:Name="itemsTable_DataGrid" Margin="0,10,0,0" FontSize="16">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ItemCode"/>  
-                        <DataGridTextColumn Header="ItemDesc"/>
-                        <DataGridTextColumn Header="Cost"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <DataGrid x:Name="itemsTable_DataGrid" Margin="0,10,0,0" FontSize="16" SelectionChanged="itemsTable_DataGrid_SelectionChanged" IsReadOnly="True"/>
             </GroupBox>
         </Grid>
 
-        <!-- 3nrd Column Edit and Search-->
+        <!-- 3rd Column Edit and Search-->
+        <!-- I need to edit this labels and boxes to match the data in the database-->
         <Grid Grid.Column="2">
             <StackPanel Orientation="Vertical">
                 

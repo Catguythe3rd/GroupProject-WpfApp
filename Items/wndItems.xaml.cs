@@ -36,7 +36,12 @@ namespace GroupProject_WpfApp.Items
 
         private void updateDataGrid()
         {
-            itemsTable_DataGrid.ItemsSource = clsItemsSQL.getItems(); // this doesn't work yet.
+            itemsTable_DataGrid.ItemsSource = clsItemsSQL.getItems();
+        }
+
+        private void itemsTable_DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

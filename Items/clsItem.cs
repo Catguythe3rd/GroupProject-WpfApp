@@ -8,16 +8,18 @@ namespace GroupProject_WpfApp.Items
 {
     public class clsItem
     {
-        public string ItemCode;
-        public string ItemDesc;
-        public decimal cost;
+        public string ItemCode { get; set; }
+        public string ItemDesc { get; set; }
+        public decimal Cost { get; set; }
 
-        public clsItem(string ItemCode, string ItemDesc, decimal cost)
+        // The code wasn't working before because the variables didn't have { get; set; } next to them.
+        // THAT'S IT. I have no idea why this change worked, but the internet suggested it.
+
+        public clsItem(string itemCode, string itemDesc, decimal cost)
         {
-
-            this.ItemCode = ItemCode;
-            this.ItemDesc = ItemDesc;
-            this.cost = cost;
+            ItemCode = itemCode;
+            ItemDesc = itemDesc;
+            Cost = cost;
         }
     }
 }

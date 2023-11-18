@@ -32,7 +32,7 @@ namespace GroupProject_WpfApp.Items
 
         private void newItem()
         {
-            // create new itme object with passed in variables, 
+            // create new item object with passed in variables, 
             // set selected item to the new item in list.
         }
 

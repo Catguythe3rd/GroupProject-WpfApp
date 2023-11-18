@@ -24,8 +24,7 @@ namespace GroupProject_WpfApp.Items
             List<clsItem> listItems = new List<clsItem>();
             for (int i = 0; i < iRef; i++)
             {
-                clsItem tempItem = new clsItem(
-                                                (string)itemsTableDataSet.Tables[0].Rows[i][0],
+                clsItem tempItem = new clsItem((string)itemsTableDataSet.Tables[0].Rows[i][0],
                                                 (string)itemsTableDataSet.Tables[0].Rows[i][1],
                                                 (decimal)itemsTableDataSet.Tables[0].Rows[i][2]
                                                 );
