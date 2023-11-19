@@ -48,23 +48,18 @@ namespace GroupProject_WpfApp.Main
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             int iRet = 0;
-            List<clsItem> listItems = new List<clsItem>();
-
-
+            lstItems = new List<clsItem>();
             ds = db.ExecuteSQLStatement("SELECT ItemCode, ItemDesc, Cost FROM ItemDesc", ref iRet);
 
-
-        
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                string code = dr[0].ToString();
-                string itemdesc = dr[1].ToString();
-                decimal cost = decimal.Parse(dr[2].ToString());
-                clsItem tempItem = new clsItem(code, itemdesc, cost);
-                listItems.Add(tempItem);
+                clsItem item = new clsItem((string)dr[0],  (string)dr[1],  (decimal)dr[2]);
+                lstItems.Add(item);
             }
-        
-            return listItems;
+
+
+
+            return lstItems;
         }
         
         
@@ -105,31 +100,31 @@ namespace GroupProject_WpfApp.Main
          }
         //
         //
-        //public List<clsItem> getONEItem()
-        //{ 
-        //    clsDataAccess db = new clsDataAccess();
-        //    DataSet ds = new DataSet();
-        //    int iRet = 0;
-        //    lstItems = new List<clsItem>();
-        //    
-        //    ds = db.ExecuteSQLStatement("SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = 5000", ref iRet);
-        //    
-        //    foreach (DataRow dr in ds.Tables[0].Rows)
-        //    {
-        //        string ItemCode = dr[0].ToString();
-        //        string ItemDesc = dr[1].ToString();
-        //        decimal cost = decimal.Parse(dr[2].ToString());
-        //    
-        //        clsItem item = new clsItem(ItemCode, ItemDesc, cost);
-        //    
-        //    
-        //    
-        //        lstItems.Add(item);
-        //    
-        //    }
-        //    return lstItems;
-        //    
-        //} 
+        public List<clsItem> getONEItem()
+        { 
+            clsDataAccess db = new clsDataAccess();
+            DataSet ds = new DataSet();
+            int iRet = 0;
+            lstItems = new List<clsItem>();
+            
+            ds = db.ExecuteSQLStatement("SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = 5000", ref iRet);
+            
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                string ItemCode = dr[0].ToString();
+                string ItemDesc = dr[1].ToString();
+                decimal cost = decimal.Parse(dr[2].ToString());
+            
+                clsItem item = new clsItem(dr[0].ToString(), dr[1].ToString(), decimal.Parse(dr[2].ToString()));
+            
+            
+            
+                lstItems.Add(item);
+            
+            }
+            return lstItems;
+            
+        } 
         //
         public void DeleteItemFromInvoice()
         {
