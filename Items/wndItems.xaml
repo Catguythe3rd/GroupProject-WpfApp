@@ -47,34 +47,34 @@
             </GroupBox>
         </Grid>
 
-        <!-- 3rd Column Edit and Search-->
-        <!-- I need to edit this labels and boxes to match the data in the database-->
+        <!-- 3rd Column Edit and Search -->
+        <!-- I need to edit this labels and boxes to match the data in the database -->
         <Grid Grid.Column="2">
             <StackPanel Orientation="Vertical">
                 
-                <!-- Edit Box-->
+                <!-- Edit group Box -->
                 <GroupBox Header="Edit Items" FontSize="16" Margin="10,10,10,10">
                     <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="ID:" FontSize="16"/>
-                            <Label Content="#000001" FontSize="16"/>
-                            <Label Content="Cost:" FontSize="16" Margin="10,0,0,0"/>
-                            <TextBox Text="$1000" FontSize="16" Margin="0,4,0,0"/>
+
+                            <!-- Label Boxes -->
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Item Code:" HorizontalAlignment="Right"/>
+                                <Label Content="Item Description:" HorizontalAlignment="Right"/>
+                                <Label Content="Cost:" HorizontalAlignment="Right"/>
+                            </StackPanel>
+
+                            <!-- text Boxes -->
+                            <StackPanel Orientation="Vertical" Width="150">
+                                <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10"/>
+                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10"/>
+                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20"/>
+                            </StackPanel>
                         </StackPanel>
                         
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Name:" FontSize="16"/>
-                            <TextBox Text="Big Horse" FontSize="16" Margin="38,4,0,0" Width="225"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Description:" FontSize="16" Margin="0,-7,0,0" />
-                            <TextBox Text="its a really big horse" FontSize="16" Width="225" Height="85"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Margin="15,0,0,0"/>
+                        <!-- Save button-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="Save_Button" Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
@@ -82,26 +82,26 @@
                 <!-- Search Box -->
                 <GroupBox Header="Search Items" FontSize="16" Margin="10,10,10,10">
                     <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="ID:" FontSize="16"/>
-                            <TextBox Text="#000001" FontSize="16" Margin="0,4,0,0"/>
-                            <Label Content="Cost:" FontSize="16" Margin="10,0,0,0"/>
-                            <TextBox Text="$1000" FontSize="16" Margin="0,4,0,0"/>
+
+                            <!-- Label Boxes -->
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Item Code:" HorizontalAlignment="Right"/>
+                                <Label Content="Item Description:" HorizontalAlignment="Right"/>
+                                <Label Content="Cost:" HorizontalAlignment="Right"/>
+                            </StackPanel>
+
+                            <!-- text Boxes -->
+                            <StackPanel Orientation="Vertical" Width="150">
+                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10"/>
+                                <TextBox Margin="0,0,0,10"/>
+                                <TextBox Margin="0,0,0,20"/>
+                            </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Name:" FontSize="16"/>
-                            <TextBox Text="Big Horse" FontSize="16" Margin="38,4,0,0" Width="225"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Description:" FontSize="16" Margin="0,-7,0,0" />
-                            <TextBox Text="its a really big horse" FontSize="16" Width="225" Height="85"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button Content="Search"  Style = "{StaticResource Column1ButtonStyle}" Margin="12,0,0,0"/>
+                        <!-- Save button-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="Search_Button" Content="Search"  Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
