@@ -108,7 +108,7 @@
             <ComboBoxItem>Option 3</ComboBoxItem>
         </ComboBox>
         <Label Content="Total Charges" HorizontalAlignment="Left" Margin="491,181,0,0" VerticalAlignment="Top"/>
-        <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="611,258,81,67" Foreground="#FFAD2E2E">
+        <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="620,254,72,71" Foreground="#FFAD2E2E">
             <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
                 <ListBoxItem>Item</ListBoxItem>
                 <ListBoxItem>Item</ListBoxItem>
