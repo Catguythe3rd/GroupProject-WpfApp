@@ -26,7 +26,7 @@ namespace GroupProject_WpfApp.Main
         wndItems itemWindow;
         wndSearch searchWindow;
         clsMainSQL mainInventory;
-        clsMainLogic mainLogic;
+        clsMainLogic mainLogic;  
         clsDataAccess db;
         #endregion
         public wndMain()
@@ -39,6 +39,7 @@ namespace GroupProject_WpfApp.Main
             searchWindow = new wndSearch(); 
             itemWindow = new wndItems();
             mainInventory = new clsMainSQL();
+
             //put info into invoice and invenotry list/drop down
             InvoiceList();
 
@@ -189,6 +190,8 @@ namespace GroupProject_WpfApp.Main
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ItemsList.Items.Clear();
+
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
             List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
@@ -197,9 +200,10 @@ namespace GroupProject_WpfApp.Main
             invoiceNum.Content = myInvoice[0].ID;
             InvoiceDateBox.Text = myInvoice[0].InvoiceDate.ToString();
             CostNum.Content = 0;//to be updated once items are fixed.
-            ItemsList.Items.Add("string");//update with getOneitems
+            ItemsList.Items.Add(mainInventory.getAllItems());//update with getOneitems
             taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
             TotalCostNum.Content = myInvoice[0].InvoiceTotal.ToString();
+            
         }
     }
 }

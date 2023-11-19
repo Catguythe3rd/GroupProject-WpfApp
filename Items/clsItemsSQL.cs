@@ -10,6 +10,7 @@ namespace GroupProject_WpfApp.Items
     public class clsItemsSQL
     {
         private clsDataAccess dataBase;           // Holds the database that was retrived by clsDataAccess class.
+        DataSet itemsTableDataSet;
 
         public clsItemsSQL()
         {
@@ -34,9 +35,23 @@ namespace GroupProject_WpfApp.Items
             return listItems;
         }
 
-        private void setItems()
+        /*private clsItem getOneItem()
         {
-            // set values from sql data base as the values in this object.
-        }
+            int iRef = 0;
+            DataSet itemsTableDataSet = dataBase.ExecuteSQLStatement("SELECT ItemCode, ItemDesc, Cost FROM ItemDesc WHERE ItemCode = 'A'", ref iRef);
+
+            List<clsItem> listItems = new List<clsItem>();
+            for (int i = 0; i < iRef; i++)
+            {
+                clsItem tempItem = new clsItem((string)itemsTableDataSet.Tables[0].Rows[i][0],
+                                                (string)itemsTableDataSet.Tables[0].Rows[i][1],
+                                                (decimal)itemsTableDataSet.Tables[0].Rows[i][2]
+                                                );
+                listItems.Add(tempItem);
+            }
+
+            return listItems;
+            //select distinct(InvoiceNum) from LineItems where ItemCode = 'A'
+        }*/
     }
 }
