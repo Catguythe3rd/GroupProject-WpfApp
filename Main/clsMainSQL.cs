@@ -51,9 +51,9 @@ namespace GroupProject_WpfApp.Main
             lstItems = new List<clsItem>();
             ds = db.ExecuteSQLStatement("SELECT ItemCode, ItemDesc, Cost FROM ItemDesc", ref iRet);
 
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            for(int i = 0; i <iRet; i++)
             {
-                clsItem item = new clsItem((string)dr[0],  (string)dr[1],  (decimal)dr[2]);
+                clsItem item = new clsItem((string)ds.Tables[0].Rows[i][0],  (string)ds.Tables[0].Rows[i][1],  (decimal)ds.Tables[0].Rows[i][2]);
                 lstItems.Add(item);
             }
 

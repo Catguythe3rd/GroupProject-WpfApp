@@ -190,6 +190,8 @@ namespace GroupProject_WpfApp.Main
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ItemsList.Items.Clear();
+
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
             List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
