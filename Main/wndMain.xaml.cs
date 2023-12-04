@@ -127,8 +127,6 @@ namespace GroupProject_WpfApp.Main
                 idNum += 5000;
                 clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
                 myInvoice.EditInvoice = true;
-                
-                
             }
 
 

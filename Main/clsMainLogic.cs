@@ -13,7 +13,6 @@ namespace GroupProject_WpfApp.Main
         private DateTime invoiceDate = DateTime.Now;
         private decimal invoiceTotal = 0;
         bool editInvoice = false;
-        bool newInvoice = false;
 
         public int ID
         {
