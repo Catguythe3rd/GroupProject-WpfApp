@@ -152,13 +152,13 @@ namespace GroupProject_WpfApp.Main
             db.ExecuteNonQuery("DELETE FROM LineItems WHERE InvoiceNum = " + invoiceID);
         }
         //
-        public void editInvoice(int num)
+        public void editInvoice(int invoiceID, int TotalCost)
         {
-            
+
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
-        
-            db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 5000");
+
+            db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + TotalCost +" WHERE InvoiceNum = "+invoiceID);
         }
         #endregion
     }
