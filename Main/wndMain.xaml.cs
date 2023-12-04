@@ -98,13 +98,7 @@ namespace GroupProject_WpfApp.Main
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
             invoicebox.IsEnabled = true;
-            List<clsMainLogic> lastInvoice = mainInventory.getAllInvoices();
-            int id =0;
-            for(int i = 0; i < lastInvoice.Count; i++)
-            {
-                id = lastInvoice[i].ID;
-            }
-            id++;
+            int id = mainInventory.getnewID();
             //show new invoice number
             invoiceNum.Content = id;
             //show current Cost
@@ -133,11 +127,7 @@ namespace GroupProject_WpfApp.Main
                 idNum += 5000;
                 clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
                 myInvoice.EditInvoice = true;
-                //show save button
-                //show select button
-                //show delete button
-                //show items list label
-                //show items list drop down
+                
                 
             }
 

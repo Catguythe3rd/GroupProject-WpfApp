@@ -151,7 +151,11 @@ namespace GroupProject_WpfApp.Main
         
             db.ExecuteNonQuery("DELETE FROM LineItems WHERE InvoiceNum = " + invoiceID);
         }
-        //
+        /// <summary>
+        /// edit invoice total cost
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <param name="TotalCost"></param>
         public void editInvoice(int invoiceID, int TotalCost)
         {
 
@@ -159,6 +163,24 @@ namespace GroupProject_WpfApp.Main
             DataSet ds = new DataSet();
 
             db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + TotalCost +" WHERE InvoiceNum = "+invoiceID);
+        }
+
+        /// <summary>
+        /// create a new id based on last largest number in id
+        /// </summary>
+        /// <returns></returns>
+        public int  getnewID()
+        {
+            List<clsMainLogic> list = getAllInvoices();
+            int id = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                id = list[i].ID;
+            }
+            id++;
+
+
+            return id;
         }
         #endregion
     }
