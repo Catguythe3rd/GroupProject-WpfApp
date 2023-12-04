@@ -29,6 +29,7 @@ namespace GroupProject_WpfApp.Main
         clsMainLogic mainLogic;  
         clsDataAccess db;
         #endregion
+        bool edit = false;
         public wndMain()
 
         { //start window
@@ -126,7 +127,7 @@ namespace GroupProject_WpfApp.Main
                 int idNum = invoice_List.SelectedIndex;
                 idNum += 5000;
                 clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
-                myInvoice.EditInvoice = true;
+                edit = true;
             }
 
 
@@ -152,22 +153,25 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            //create new invoice obj
+            clsMainLogic newInvoice = new clsMainLogic();
+            //save invoice id
+            newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
             //save invoice date to invoice obj 
-
-
+            newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
             //save itemsList to invoice obj
             //save Cost to invoice obj
-            //save Tax to invoice obj
-            //save Total Cost to invoice obj
-            //upload invoice date to invoice obj
+            newInvoice.InvoiceTotal = Int32.Parse(TotalCostNum.Content.ToString());
             //if new: newInvoice()
-            //List<clsMainLogic> newInvoice = mainInventory.getOneInvoice();
+            if (edit = false)
+            {
+               // mainInventory.newInvoice();//doesn't add all info yet. 
+            }
             //if edit: editInvoice()
-
+            else {//doesn't add all info yet// mainInventory.editInvoice(newInvoice.ID, newInvoice.InvoiceTotal);
+                  }
             //hide all invoice buttons
-
-            mainInventory.newInvoice(); //doesn't  work yet.
-
+            invoicebox.IsEnabled = false;
         }
 
         /// <summary>

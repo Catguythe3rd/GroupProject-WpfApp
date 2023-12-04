@@ -155,7 +155,7 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         /// <param name="invoiceID"></param>
         /// <param name="TotalCost"></param>
-        public void editInvoice(int invoiceID, int TotalCost)
+        public void editInvoice(int invoiceID, decimal TotalCost)
         {
 
             clsDataAccess db = new clsDataAccess();

@@ -83,7 +83,7 @@
                 <Label Grid.Column="1" x:Name="invoiceNum" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center"  Width="79"/>
                 <Label Grid.Column="1" x:Name="CostNum" HorizontalAlignment="Left"  Grid.Row="6" VerticalAlignment="Center"  Width="79"/>
                 <Label Grid.Column="1" x:Name="taxNum" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"  Width="79"  />
-                <Label Grid.Column="1" x:Name="TotalCostNum" HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center"  Width="79" />
+                <Label Grid.Column="1" x:Name="TotalCostNum" HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center"  Width="79" Content="0" />
 
             </Grid>
         </Border>
