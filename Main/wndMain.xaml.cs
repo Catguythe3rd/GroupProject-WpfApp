@@ -189,8 +189,9 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            //collect selected items id
-            mainInventory.DeleteItemFromInvoice(); 
+            int num = Int32.Parse(invoiceNum.Content.ToString());
+            if(invoiceNum.Content == null) { return; }
+            else  mainInventory.DeleteItemsFromInvoice(num); 
         }
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
