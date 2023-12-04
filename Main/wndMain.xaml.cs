@@ -40,17 +40,18 @@ namespace GroupProject_WpfApp.Main
             itemWindow = new wndItems();
             mainInventory = new clsMainSQL();
 
-            //put info into invoice and invenotry list/drop down
+            //put info into invoice and inventory list/drop down
             InvoiceList();
 
             
         }
 
         /// <summary>
-        /// binds information to invoice_list and ditmeDropDown
+        /// binds information to invoice_list and itemDropDown
         /// </summary>
         private void InvoiceList()
         {
+            
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
             ItemDropDown.ItemsSource = mainInventory.getAllItems();//fix doesn't populate properly
         }
@@ -83,8 +84,8 @@ namespace GroupProject_WpfApp.Main
             this.Hide();
             searchWindow.Show();
             this.Show();
-            //hide main
-            //open search page
+            //catch invoice id
+            //invoiceList.selectedIndex = invoiceID
 
         }
 
@@ -96,6 +97,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
+            invoicebox.IsEnabled = true;
             List<clsMainLogic> lastInvoice = mainInventory.getAllInvoices();
             int id =0;
             for(int i = 0; i < lastInvoice.Count; i++)
@@ -121,19 +123,22 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            if (invoice_List.SelectedIndex == null) return;
+            
+            if (invoice_List.SelectedItem == null) return;
             else
             {
+                invoicebox.IsEnabled = true;
                 //grab invoice info
                 int idNum = invoice_List.SelectedIndex;
                 idNum += 5000;
-                List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
+                clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
+                myInvoice.EditInvoice = true;
                 //show save button
                 //show select button
                 //show delete button
                 //show items list label
                 //show items list drop down
-                mainInventory.editInvoice(myInvoice[0].ID); //not working yet
+                
             }
 
 
@@ -194,15 +199,15 @@ namespace GroupProject_WpfApp.Main
 
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
-            List<clsMainLogic> myInvoice = mainInventory.getOneInvoice(idNum);
+            clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
             decimal cost = 0;
             decimal tax = 0;
-            invoiceNum.Content = myInvoice[0].ID;
-            InvoiceDateBox.Text = myInvoice[0].InvoiceDate.ToString();
+            invoiceNum.Content = myInvoice.ID;
+            InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
             CostNum.Content = 0;//to be updated once items are fixed.
             ItemsList.Items.Add(mainInventory.getAllItems());//update with getOneitems
             taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
-            TotalCostNum.Content = myInvoice[0].InvoiceTotal.ToString();
+            TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
             
         }
     }

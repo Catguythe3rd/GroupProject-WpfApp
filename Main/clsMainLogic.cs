@@ -12,6 +12,8 @@ namespace GroupProject_WpfApp.Main
         private int invoiceNum = 0;
         private DateTime invoiceDate = DateTime.Now;
         private decimal invoiceTotal = 0;
+        bool editInvoice = false;
+        bool newInvoice = false;
 
         public int ID
         {
@@ -29,6 +31,18 @@ namespace GroupProject_WpfApp.Main
         {
             get { return invoiceTotal; }
             set { invoiceTotal = value; }
+        }
+
+        public bool EditInvoice
+        {
+            get { return editInvoice; }
+            set { editInvoice = value; }
+        }
+
+        public bool NewInvoice
+        {
+            get { return newInvoice; }
+            set { newInvoice = value; }
         }
 
 

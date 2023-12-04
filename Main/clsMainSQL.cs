@@ -75,7 +75,7 @@ namespace GroupProject_WpfApp.Main
         }
         
         
-         public List<clsMainLogic> getOneInvoice(int id)
+         public clsMainLogic getOneInvoice(int id)
          {
              clsDataAccess db = new clsDataAccess();
              DataSet ds = new DataSet();
@@ -96,7 +96,7 @@ namespace GroupProject_WpfApp.Main
                  lstInvoices.Add(Invoice);
          
              }
-             return lstInvoices;
+             return lstInvoices[0];
          }
         //
         //
