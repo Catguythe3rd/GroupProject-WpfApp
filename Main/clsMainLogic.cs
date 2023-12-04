@@ -38,12 +38,6 @@ namespace GroupProject_WpfApp.Main
             set { editInvoice = value; }
         }
 
-        public bool NewInvoice
-        {
-            get { return newInvoice; }
-            set { newInvoice = value; }
-        }
-
 
         public override string ToString()
         {

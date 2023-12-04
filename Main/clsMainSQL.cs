@@ -72,9 +72,8 @@ namespace GroupProject_WpfApp.Main
         {
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
-            int iRet = 0;
         
-            ds = db.ExecuteSQLStatement("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)", ref iRet);
+            db.ExecuteNonQuery("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)");
         
             
         }
