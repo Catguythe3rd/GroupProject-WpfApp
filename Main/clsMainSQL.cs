@@ -74,7 +74,11 @@ namespace GroupProject_WpfApp.Main
             
         }
         
-        
+        /// <summary>
+        /// get one invoice with id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
          public clsMainLogic getOneInvoice(int id)
          {
              clsDataAccess db = new clsDataAccess();
@@ -98,9 +102,10 @@ namespace GroupProject_WpfApp.Main
              }
              return lstInvoices[0];
          }
-        //
-        //
-        public List<clsItem> getONEItem()
+        
+
+
+        public clsItem getONEItem()
         { 
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
@@ -122,7 +127,7 @@ namespace GroupProject_WpfApp.Main
                 lstItems.Add(item);
             
             }
-            return lstItems;
+            return lstItems[0];
             
         } 
         //
