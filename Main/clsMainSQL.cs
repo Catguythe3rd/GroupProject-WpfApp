@@ -43,6 +43,11 @@ namespace GroupProject_WpfApp.Main
             return lstInvoices;
         }
         #region code
+
+        /// <summary>
+        /// get a list of all items.
+        /// </summary>
+        /// <returns></returns>
         public List<clsItem> getAllItems()
         {
             clsDataAccess db = new clsDataAccess();
@@ -104,7 +109,10 @@ namespace GroupProject_WpfApp.Main
          }
         
 
-
+        /// <summary>
+        /// get one  item
+        /// </summary>
+        /// <returns></returns>
         public clsItem getONEItem()
         { 
             clsDataAccess db = new clsDataAccess();
@@ -131,13 +139,17 @@ namespace GroupProject_WpfApp.Main
             
         } 
         //
-        public void DeleteItemFromInvoice()
+
+        /// <summary>
+        /// delete all items from selected invoice.
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        public void DeleteItemsFromInvoice(int invoiceID)
         {
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
-            int iRet = 0; 
         
-            ds = db.ExecuteSQLStatement("DELETE FROM LineItems WHERE InvoiceNum = 5000", ref iRet);
+            db.ExecuteNonQuery("DELETE FROM LineItems WHERE InvoiceNum = " + invoiceID);
         }
         //
         public void editInvoice(int num)
