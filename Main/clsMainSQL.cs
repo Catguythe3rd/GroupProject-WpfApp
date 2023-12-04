@@ -157,9 +157,8 @@ namespace GroupProject_WpfApp.Main
             
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
-            int iRet = 0;
         
-            ds = db.ExecuteSQLStatement("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 5000", ref iRet);
+            db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 5000");
         }
         #endregion
     }
