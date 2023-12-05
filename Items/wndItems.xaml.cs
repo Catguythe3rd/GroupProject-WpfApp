@@ -66,7 +66,7 @@ namespace GroupProject_WpfApp.Items
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            clsItemsLogic.editedItemHasBeenSaved = true;
+            clsItemsLogic.HasBeenSaved_editedItem = true;
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)

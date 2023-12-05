@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupProject_WpfApp.Items"
         mc:Ignorable="d"
-        Title="Defenition Table" Height="530" Width="820">
-   
+        Title="Defenition Table" Height="530" Width="820" Background="RoyalBlue">
+
     <!-- This handles the style of the grid-space buttons-->
     <Window.Resources>
         <Style x:Key = "Column1ButtonStyle" TargetType = "Button">
@@ -15,7 +15,7 @@
             <Setter Property="FontSize" Value="16"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75"/>
@@ -42,26 +42,25 @@
 
         <!-- 2nd Column Table-->
         <Grid Grid.Column="1">
-            <GroupBox Header="Items Table" FontSize="16" Margin="0,10,0,10">
-                <DataGrid x:Name="itemsTable_DataGrid" Margin="0,10,0,0" FontSize="16" SelectionChanged="itemsTable_DataGrid_SelectionChanged" IsReadOnly="True"/>
-            </GroupBox>
+            <Label Content="MAL's" Foreground="Gold" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="0" FontFamily="Edwardian Script ITC" FontSize="36" FontWeight="Bold"/>
+            <DataGrid x:Name="itemsTable_DataGrid" Margin="10,50,10,20" FontSize="16" SelectionChanged="itemsTable_DataGrid_SelectionChanged" IsReadOnly="True" Background="#FFFFFAE7"/>
         </Grid>
 
         <!-- 3rd Column Edit and Search -->
         <!-- I need to edit this labels and boxes to match the data in the database -->
         <Grid Grid.Column="2">
             <StackPanel Orientation="Vertical">
-                
+
                 <!-- Edit group Box -->
-                <GroupBox Header="Edit Items" FontSize="16" Margin="10,10,10,10">
+                <GroupBox Header="Edit Items" FontSize="16" Margin="10,10,10,10" Foreground="White" BorderBrush="Gold" BorderThickness="2">
                     <StackPanel Orientation="Vertical" Margin="10,10,10,10">
                         <StackPanel Orientation="Horizontal">
 
                             <!-- Label Boxes -->
                             <StackPanel Orientation="Vertical">
-                                <Label Content="Item Code:" HorizontalAlignment="Right"/>
-                                <Label Content="Item Description:" HorizontalAlignment="Right"/>
-                                <Label Content="Cost:" HorizontalAlignment="Right"/>
+                                <Label Content="Item Code:" HorizontalAlignment="Right" Foreground="White"/>
+                                <Label Content="Item Description:" HorizontalAlignment="Right" Foreground="White"/>
+                                <Label Content="Cost:" HorizontalAlignment="Right" Foreground="White"/>
                             </StackPanel>
 
                             <!-- text Boxes -->
@@ -71,7 +70,7 @@
                                 <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" TextChanged="Edit_Cost_TextBox_TextChanged"/>
                             </StackPanel>
                         </StackPanel>
-                        
+
                         <!-- Save button-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button x:Name="save_Button" Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click"/>
@@ -80,15 +79,15 @@
                 </GroupBox>
 
                 <!-- Search Box -->
-                <GroupBox Header="Search Items" FontSize="16" Margin="10,10,10,10">
+                <GroupBox Header="Search Items" FontSize="16" Margin="10,10,10,10" Foreground="White" BorderBrush="Gold" BorderThickness="2">
                     <StackPanel Orientation="Vertical" Margin="10,10,10,10">
                         <StackPanel Orientation="Horizontal">
 
                             <!-- Label Boxes -->
                             <StackPanel Orientation="Vertical">
-                                <Label Content="Item Code:" HorizontalAlignment="Right"/>
-                                <Label Content="Item Description:" HorizontalAlignment="Right"/>
-                                <Label Content="Cost:" HorizontalAlignment="Right"/>
+                                <Label Content="Item Code:" HorizontalAlignment="Right" Foreground="White"/>
+                                <Label Content="Item Description:" HorizontalAlignment="Right" Foreground="White"/>
+                                <Label Content="Cost:" HorizontalAlignment="Right" Foreground="White"/>
                             </StackPanel>
 
                             <!-- text Boxes -->
