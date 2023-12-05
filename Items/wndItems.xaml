@@ -43,7 +43,7 @@
         <!-- 2nd Column Table-->
         <Grid Grid.Column="1">
             <Label Content="MAL's" Foreground="Gold" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="0" FontFamily="Edwardian Script ITC" FontSize="36" FontWeight="Bold"/>
-            <DataGrid x:Name="itemsTable_DataGrid" Margin="10,50,10,20" FontSize="16" SelectionChanged="itemsTable_DataGrid_SelectionChanged" IsReadOnly="True" Background="#FFFFFAE7"/>
+            <DataGrid x:Name="itemsTable_DataGrid" Margin="10,50,10,20" FontSize="16" SelectionChanged="itemsTable_DataGrid_SelectionChanged" IsReadOnly="True"/>
         </Grid>
 
         <!-- 3rd Column Edit and Search -->
@@ -72,8 +72,9 @@
                         </StackPanel>
 
                         <!-- Save button-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="save_Button" Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click"/>
+                        <StackPanel Orientation="Vertical">
+                            <Button x:Name="save_Button" Content="Save" Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                            <Label x:Name="EditError_Label" Content="Item unsaved" HorizontalAlignment="Center" Foreground="White" Background="Red" Visibility="Hidden"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
@@ -93,14 +94,16 @@
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
                                 <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10" TextChanged="Search_Code_TextBox_TextChanged"/>
-                                <TextBox Margin="0,0,0,10" TextChanged="TextBox_TextChanged"/>
-                                <TextBox Margin="0,0,0,20" TextChanged="TextBox_TextChanged_1"/>
+                                <TextBox x:Name="Search_Description_TextBox" Margin="0,0,0,10" TextChanged="Search_Description_TextBox_TextChanged"/>
+                                <TextBox x:Name="Search_Cost_TextBox" Margin="0,0,0,20" TextChanged="Search_Cost_TextBox_TextChanged"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- Save button-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="search_Button" Content="Search"  Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click"/>
+
+                        <StackPanel Orientation="Vertical">
+                            <Button x:Name="search_Button" Content="Search" Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                            <Label x:Name="Unused_SearchError_Label" Content="Unused_SearchError_Label" HorizontalAlignment="Center" Foreground="White" Background="Red" IsEnabled="False" Visibility="Hidden"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>

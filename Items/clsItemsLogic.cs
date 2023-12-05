@@ -26,16 +26,6 @@ namespace GroupProject_WpfApp.Items
         static List<clsItem> items; // I'm not sure whether I'll update database after itemsWindow,
                                     // meaning acts as a temperary list.
 
-        // Variables that are Implimented
-        public bool isValid_Edit_Cost = false;
-        public bool isValid_Edit_Name = false;
-        public bool isValid_Edit_Description = false;
-        public bool HasBeenSaved_editedItem = true;
-
-        public bool isValid_Search_Cost = false;
-        public bool isValid_Search_Name = false;
-        public bool isValid_Search_Description = false;
-
 
         clsItemsSQL clsItemsSQL;
 
