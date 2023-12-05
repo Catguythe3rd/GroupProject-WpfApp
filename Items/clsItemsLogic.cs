@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,17 +19,116 @@ namespace GroupProject_WpfApp.Items
         // main window will call a function or reset a variable that represents the list of
         // items from itme window.
 
-        // variables holding the user input from the front end.
 
-        static List<clsItem> items; // some sort of list created from sql database.
 
-        bool isValidCost;
-        bool isValidName;
-        bool isValidDescription;
 
-        clsItemsLogic()
+        // Variables Not Yet Implemented
+        static List<clsItem> items; // I'm not sure whether I'll update database after itemsWindow,
+                                    // meaning acts as a temperary list.
+
+        // Variables that are Implimented
+        public bool isValid_Edit_Cost = false;
+        public bool isValid_Edit_Name = false;
+        public bool isValid_Edit_Description = false;
+        public bool HasBeenSaved_editedItem = true;
+
+        public bool isValid_Search_Cost = false;
+        public bool isValid_Search_Name = false;
+        public bool isValid_Search_Description = false;
+
+
+        clsItemsSQL clsItemsSQL;
+
+        public clsItemsLogic()
         {
-            items = new List<clsItem>(); // reset the list items upon contruction.
+            clsItemsSQL = new clsItemsSQL(); 
+        }
+
+        public List<clsItem> getAllItems()
+        {
+            try
+            {
+                int iRef = 0;
+                DataSet itemsTableDataSet = clsItemsSQL.selectAllItems(ref iRef);
+
+                List<clsItem> listItems = new List<clsItem>();
+
+                for (int i = 0; i < iRef; i++)
+                {
+                    clsItem tempItem = new clsItem((string)itemsTableDataSet.Tables[0].Rows[i][0],
+                                                    (string)itemsTableDataSet.Tables[0].Rows[i][1],
+                                                    (decimal)itemsTableDataSet.Tables[0].Rows[i][2]
+                                                    );
+                    listItems.Add(tempItem);
+                }
+
+                return listItems;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+        }
+
+        public List<clsItem> getItemsWithItemcode(string itemCode)
+        {
+            try
+            {
+                int iRef = 0;
+                DataSet itemsTableDataSet = clsItemsSQL.selectItemsWithItemcode(itemCode, ref iRef);
+
+                List<clsItem> listItems = new List<clsItem>();
+                for (int i = 0; i < iRef; i++)
+                {
+                    clsItem tempItem = new clsItem((string)itemsTableDataSet.Tables[0].Rows[i][0],
+                                                    (string)itemsTableDataSet.Tables[0].Rows[i][1],
+                                                    (decimal)itemsTableDataSet.Tables[0].Rows[i][2]
+                                                    );
+                    listItems.Add(tempItem);
+                }
+
+                return listItems;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+        }
+
+        public void updateItem(string itemDescription, decimal cost, string itemCode)
+        {
+            try
+            {
+                clsItemsSQL.updateItem(itemDescription, cost, itemCode);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+        }
+
+        public void insertItem(string itemCode, string itemDescription, decimal cost)
+        {
+            try
+            {
+                clsItemsSQL.insertItem(itemCode, itemDescription, cost);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+        }
+
+        public void deleteItem(string itemCode)
+        {
+            try
+            {
+                clsItemsSQL.deleteItem(itemCode);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
         }
 
         private void newItem()

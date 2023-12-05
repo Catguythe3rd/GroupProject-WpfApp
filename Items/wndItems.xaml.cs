@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupProject_WpfApp.Main;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,15 +21,37 @@ namespace GroupProject_WpfApp.Items
     /// </summary>
     public partial class wndItems : Window
     {
-        clsItemsSQL clsItemsSQL;
+        #region TestRegion_Variables
+        clsItemsLogic clsItemsLogic;
         List<clsItem> itemsList;
+        #endregion
 
         public wndItems()
         {
             InitializeComponent();
-            clsItemsSQL = new clsItemsSQL();
-            itemsList = clsItemsSQL.getItems();
+            clsItemsLogic = new clsItemsLogic(); 
+            itemsList = clsItemsLogic.getAllItems();
             itemsTable_DataGrid.ItemsSource = itemsList;
+        }
+
+        private void new_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void upArrow_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void downArrow_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void itemsTable_DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -43,10 +66,40 @@ namespace GroupProject_WpfApp.Items
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            clsItemsLogic.editedItemHasBeenSaved = true;
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Edit_Code_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            clsItemsLogic.HasBeenSaved_editedItem = false;
+        }
+
+        private void Edit_Description_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            clsItemsLogic.HasBeenSaved_editedItem = false;
+        }
+
+        private void Edit_Cost_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            clsItemsLogic.HasBeenSaved_editedItem = false;
+        }
+
+        private void Search_Code_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
         }

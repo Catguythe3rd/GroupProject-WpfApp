@@ -26,15 +26,15 @@
         <!-- 1st Column - Buttons-->
         <Grid Grid.Column="0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <Button Content="New" Style = "{StaticResource Column1ButtonStyle}" Margin="0,50,0,10"/>
-                <Button Content="Delete" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,40"/>
+                <Button x:Name="new_Button" Content="New" Style = "{StaticResource Column1ButtonStyle}" Margin="0,50,0,10" Click="new_Button_Click"/>
+                <Button x:Name="delete_Button" Content="Delete" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,40" Click="delete_Button_Click"/>
 
-                <Button Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10">
+                <Button x:Name="upArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="upArrow_Button_Click">
                     <Path Stroke="Black" Data="M 0 8 L 8 0 L 16 8 "/>
                     <!--(0,0) is in the top left. Pos x is down, pos y is right. Its called "Path Markup Syntax"-->
                 </Button>
 
-                <Button Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10">
+                <Button x:Name="downArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="downArrow_Button_Click">
                     <Path Stroke="Black" Data="M 0 0 L 8 8 L 16 0 "/>
                 </Button>
             </StackPanel>
@@ -66,15 +66,15 @@
 
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
-                                <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10"/>
-                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10"/>
-                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20"/>
+                                <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10" TextChanged="Edit_Code_TextBox_TextChanged"/>
+                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" TextChanged="Edit_Description_TextBox_TextChanged"/>
+                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" TextChanged="Edit_Cost_TextBox_TextChanged"/>
                             </StackPanel>
                         </StackPanel>
                         
                         <!-- Save button-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="Save_Button" Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click"/>
+                            <Button x:Name="save_Button" Content="Save"  Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
@@ -93,15 +93,15 @@
 
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
-                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10"/>
-                                <TextBox Margin="0,0,0,10"/>
-                                <TextBox Margin="0,0,0,20"/>
+                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10" TextChanged="Search_Code_TextBox_TextChanged"/>
+                                <TextBox Margin="0,0,0,10" TextChanged="TextBox_TextChanged"/>
+                                <TextBox Margin="0,0,0,20" TextChanged="TextBox_TextChanged_1"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- Save button-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="Search_Button" Content="Search"  Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click"/>
+                            <Button x:Name="search_Button" Content="Search"  Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
