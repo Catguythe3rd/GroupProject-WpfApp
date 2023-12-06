@@ -51,20 +51,28 @@ namespace GroupProject_WpfApp.Main
         public List<clsItem> getAllItems()
         {
             clsDataAccess db = new clsDataAccess();
-            DataSet ds = new DataSet();
             int iRet = 0;
             lstItems = new List<clsItem>();
-            ds = db.ExecuteSQLStatement("SELECT ItemCode, ItemDesc, Cost FROM ItemDesc", ref iRet);
+            
+            
+            DataSet ds = db.ExecuteSQLStatement("SELECT ItemCode, ItemDesc, Cost FROM ItemDesc", ref iRet);
 
-            for(int i = 0; i <iRet; i++)
+
+
+            List<clsItem> listItems = new List<clsItem>();
+
+            for (int i = 0; i < iRet; i++)
             {
-                clsItem item = new clsItem((string)ds.Tables[0].Rows[i][0],  (string)ds.Tables[0].Rows[i][1],  (decimal)ds.Tables[0].Rows[i][2]);
-                lstItems.Add(item);
+                clsItem tempItem = new clsItem((string)ds.Tables[0].Rows[i][0],
+                                                (string)ds.Tables[0].Rows[i][1],
+                                                (decimal)ds.Tables[0].Rows[i][2]
+                                                );
+                listItems.Add(tempItem);
             }
 
+            return listItems;
 
 
-            return lstItems;
         }
         
         

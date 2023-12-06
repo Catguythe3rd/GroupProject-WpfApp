@@ -2,6 +2,7 @@
 using GroupProject_WpfApp.Search;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace GroupProject_WpfApp.Main
 
             //put info into invoice and inventory list/drop down
             InvoiceList();
+            itemsList();
 
             
         }
@@ -54,7 +56,13 @@ namespace GroupProject_WpfApp.Main
         {
             
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
-            ItemDropDown.ItemsSource = mainInventory.getAllItems();//fix doesn't populate properly
+        }
+
+        private void itemsList()
+        {
+           
+            List<clsItem> itemsList = mainInventory.getAllItems();  // Stores a list of the items from the database.
+            ItemDropDown.ItemsSource = itemsList;
         }
 
         /// <summary>
