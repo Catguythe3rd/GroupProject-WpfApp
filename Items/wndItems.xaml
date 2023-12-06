@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupProject_WpfApp.Items"
         mc:Ignorable="d"
-        Title="Defenition Table" Height="530" Width="820" Background="RoyalBlue">
+        Title="Item Inventory" Height="530" Width="820" Background="RoyalBlue">
 
     <!-- This handles the style of the grid-space buttons-->
     <Window.Resources>
@@ -31,7 +31,7 @@
 
                 <Button x:Name="upArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="upArrow_Button_Click">
                     <Path Stroke="Black" Data="M 0 8 L 8 0 L 16 8 "/>
-                    <!--(0,0) is in the top left. Pos x is down, pos y is right. Its called "Path Markup Syntax"-->
+                    <!--(0,0) is in the top left. Pos x is right, pos y is down. Its called "Path Markup Syntax"-->
                 </Button>
 
                 <Button x:Name="downArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="downArrow_Button_Click">
@@ -65,9 +65,9 @@
 
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
-                                <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10" TextChanged="Edit_Code_TextBox_TextChanged"/>
-                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" TextChanged="Edit_Description_TextBox_TextChanged"/>
-                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" TextChanged="Edit_Cost_TextBox_TextChanged"/>
+                                <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10" TextChanged="Edit_Code_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" TextChanged="Edit_Description_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" TextChanged="Edit_Cost_TextBox_TextChanged" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
                             </StackPanel>
                         </StackPanel>
 
@@ -93,9 +93,9 @@
 
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
-                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10" TextChanged="Search_Code_TextBox_TextChanged"/>
-                                <TextBox x:Name="Search_Description_TextBox" Margin="0,0,0,10" TextChanged="Search_Description_TextBox_TextChanged"/>
-                                <TextBox x:Name="Search_Cost_TextBox" Margin="0,0,0,20" TextChanged="Search_Cost_TextBox_TextChanged"/>
+                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10" TextChanged="Search_Code_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Search_Description_TextBox" Margin="0,0,0,10" TextChanged="Search_Description_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Search_Cost_TextBox" Margin="0,0,0,20" TextChanged="Search_Cost_TextBox_TextChanged" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
                             </StackPanel>
                         </StackPanel>
 

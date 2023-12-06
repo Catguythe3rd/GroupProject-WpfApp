@@ -160,19 +160,18 @@ namespace GroupProject_WpfApp.Items
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            /*try
+            try
             {
-                if (HasBeenSaved_editedItem == true)
+                if (isValid_editItemInputs == true)
                 {
                     clsItemsLogic.updateItem(selectedItem.ItemDesc, selectedItem.Cost, selectedItem.ItemCode);
-                    HasBeenSaved_editedItem = true;
                 }
             }
             catch (Exception ex)
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }*/
+            }
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)
@@ -185,6 +184,51 @@ namespace GroupProject_WpfApp.Items
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void txtLetterInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                //Only allow letters to be entered
+                if (!(e.Key >= Key.A && e.Key <= Key.Z))
+                {
+                    //Allow the user to use the backspace, delete, tab and enter
+                    if (!(e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Tab || e.Key == Key.Enter 
+                        || e.Key == Key.Space))
+                    {
+                        //No other keys allowed besides numbers, backspace, delete, tab, and enter
+                        e.Handled = true;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void txtNumberInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                //Only allow letters to be entered
+                if (!(e.Key >= Key.D0 && e.Key <= Key.D9))
+                {
+                    //Allow the user to use the backspace, delete, tab and enter
+                    if (!(e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Enter))
+                    {
+                        //No other keys allowed besides numbers, backspace, delete, tab, and enter
+                        e.Handled = true;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
