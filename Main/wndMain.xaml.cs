@@ -44,9 +44,7 @@ namespace GroupProject_WpfApp.Main
 
             //put info into invoice and inventory list/drop down
             InvoiceList();
-            itemsList();
-
-            
+            itemsList();            
         }
 
         /// <summary>
@@ -54,7 +52,7 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         private void InvoiceList()
         {
-            
+
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
         }
 
@@ -62,7 +60,10 @@ namespace GroupProject_WpfApp.Main
         {
            
             List<clsItem> itemsList = mainInventory.getAllItems();  // Stores a list of the items from the database.
-            ItemDropDown.ItemsSource = itemsList;
+            for(int i = 0 ; i < itemsList.Count; i++)
+            {
+                ItemDropDown.Items.Add(itemsList[i]);
+            }
         }
 
         /// <summary>
