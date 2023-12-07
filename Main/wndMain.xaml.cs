@@ -58,12 +58,14 @@ namespace GroupProject_WpfApp.Main
 
         private void itemsList()
         {
-           
+
             List<clsItem> itemsList = mainInventory.getAllItems();  // Stores a list of the items from the database.
+
             for(int i = 0 ; i < itemsList.Count; i++)
             {
                 ItemDropDown.Items.Add(itemsList[i]);
             }
+
         }
 
         /// <summary>
@@ -119,29 +121,7 @@ namespace GroupProject_WpfApp.Main
             TotalCostNum.Content = 0;
 
         }
-
-        /// <summary>
-        /// edit selected invoice. Doesn't work yet 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void editButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if (invoice_List.SelectedItem == null) return;
-            else
-            {
-                invoicebox.IsEnabled = true;
-                //grab invoice info
-                int idNum = invoice_List.SelectedIndex;
-                idNum += 5000;
-                clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
-                edit = true;
-            }
-
-
-
-        }
+         
 
         /// <summary>
         /// send selected inventory obj from drop down to items list

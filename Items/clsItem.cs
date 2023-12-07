@@ -21,5 +21,10 @@ namespace GroupProject_WpfApp.Items
             ItemDesc = itemDesc;
             Cost = cost;
         }
+
+        public override string ToString()
+        {
+            return ItemCode + " " + ItemDesc + " " + Cost;
+        }
     }
 }
