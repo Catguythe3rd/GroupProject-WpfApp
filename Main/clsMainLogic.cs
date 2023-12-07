@@ -37,5 +37,9 @@ namespace GroupProject_WpfApp.Main
             return "ID: "+ ID.ToString() + " Date:" + invoiceDate.ToString() + " Total: $" + invoiceTotal.ToString();
         }
          
+        public decimal Tax(decimal amount)
+        {
+            return Decimal.Multiply(amount, 0.1m);
+        }
     }
 }

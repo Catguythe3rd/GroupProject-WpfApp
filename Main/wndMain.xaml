@@ -62,22 +62,22 @@
                 <Label x:Name="invoiceDateLabel" Content="Invoice Date: " HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
                 <Label x:Name="ItemsListLabel" Content="Items List: " HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
                 <ListBox x:Name="ItemsList" Grid.Row="4" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3"/>
-                <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Center" Grid.Row="5" Width="128" Click="SaveButton_Click" Margin="0,8,0,7"/>
-                <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="129" Grid.Column="1" Grid.ColumnSpan="2" Click="DeleteButton_Click"/>
+                <Button x:Name="SaveButton" IsEnabled="false" Content="Save" HorizontalAlignment="Center" Grid.Row="5" Width="128" Click="SaveButton_Click" Margin="0,8,0,7"/>
+                <Button x:Name="DeleteButton" IsEnabled="false" Content="Delete" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="129" Grid.Column="1" Grid.ColumnSpan="2" Click="DeleteButton_Click"/>
                 <Label x:Name="CostLabel" Content="Cost: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label x:Name="TaxLabel" Content="+ Tax: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
                 <Label x:Name="TotalCostLabel" Content="Total Cost: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center"/>
 
                 <Label x:Name="invoiceNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
-                <TextBox x:Name="InvoiceDateBox" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="174" Grid.RowSpan="2" Grid.ColumnSpan="2" Height="18" Margin="0,35,0,0"/>
+                <TextBox x:Name="InvoiceDateBox" IsReadOnly="true" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="174" Grid.RowSpan="2" Grid.ColumnSpan="2" Height="18" Margin="0,35,0,0"/>
                 <ComboBox x:Name="ItemDropDown" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="90"/>
                 <Label x:Name="CostNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label x:Name="TaxNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
                 <Label x:Name="TotalCostNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center"/>
-                <Button x:Name="SelectButton" Grid.Column="2" Content="Select" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="72" Click="SelectButton_Click"/>
+                <Button x:Name="SelectButton" IsEnabled="False" Grid.Column="2" Content="Select" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="72" Click="SelectButton_Click"/>
                 <Label Grid.Column="1" x:Name="invoiceNum" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Center"  Width="79"/>
-                <Label Grid.Column="1" x:Name="CostNum" HorizontalAlignment="Left"  Grid.Row="6" VerticalAlignment="Center"  Width="79"/>
-                <Label Grid.Column="1" x:Name="taxNum" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"  Width="79"  />
+                <Label Grid.Column="1" x:Name="CostNum" HorizontalAlignment="Left"  Grid.Row="6" VerticalAlignment="Center"  Width="79" Content="0"/>
+                <Label Grid.Column="1" x:Name="taxNum" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"  Width="79"  Content="0" />
                 <Label Grid.Column="1" x:Name="TotalCostNum" HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center"  Width="79" Content="0" />
 
             </Grid>

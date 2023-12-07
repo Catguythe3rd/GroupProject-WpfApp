@@ -118,7 +118,7 @@ namespace GroupProject_WpfApp.Main
         /// get some  items based on invoice id
         /// </summary>
         /// <returns></returns>
-        public List<clsItem> getONEItem(int invoiceNum)
+        public List<clsItem> getSomeItem(int invoiceNum)
         { 
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
@@ -142,7 +142,9 @@ namespace GroupProject_WpfApp.Main
             }
             return lstItems;
             
-        } 
+        }
+
+
         //
 
         /// <summary>

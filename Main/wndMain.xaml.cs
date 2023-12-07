@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Converters;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
@@ -32,6 +33,7 @@ namespace GroupProject_WpfApp.Main
         #endregion
         bool edit = false;
         static int invoiceID;
+        static string itemsID;
         public wndMain()
 
         { //start window
@@ -76,6 +78,7 @@ namespace GroupProject_WpfApp.Main
         
             //open items page
             itemWindow.Show();
+            
             this.Show();
         }
 
@@ -89,6 +92,7 @@ namespace GroupProject_WpfApp.Main
 
             this.Hide();
             searchWindow.Show();
+            //invoiceID = searchWindow. insert searWindowClassName here
             this.Show();
             //catch invoice id
             //invoiceList.selectedIndex = invoiceID
@@ -103,7 +107,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            invoicebox.IsEnabled = true;
+            isEnabled(true);
             int id = mainInventory.getnewID();
             //show new invoice number
             invoiceNum.Content = id;
@@ -129,8 +133,22 @@ namespace GroupProject_WpfApp.Main
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             //Grab item number getONEItem()
-            
+            ItemsList.Items.Add(ItemDropDown.SelectedItem);
+
+            //split items into variables
+            string item = ItemDropDown.SelectedItem.ToString();
+            string[] itemVar = item.Split(' ');
+            string itemCost = "";
+            for(int i = 0; i  < itemVar.Length; i++) {
+             itemCost = itemVar[i];
+            }
+            decimal Cost = Convert.ToDecimal(CostNum.Content) + Convert.ToDecimal(itemCost);
+
             //add item Description and cost it ItemsList
+            CostNum.Content = Cost;
+            taxNum.Content = decimal.Multiply(Cost, .1m);
+            decimal TotalCost =  Convert.ToDecimal(taxNum.Content) + Cost;
+            TotalCostNum.Content = TotalCost;
         }
 
         /// <summary>
@@ -158,7 +176,7 @@ namespace GroupProject_WpfApp.Main
             else {//doesn't add all info yet// mainInventory.editInvoice(newInvoice.ID, newInvoice.InvoiceTotal);
                   }
             //hide all invoice buttons
-            invoicebox.IsEnabled = false;
+            isEnabled(false);
         }
 
         /// <summary>
@@ -175,7 +193,7 @@ namespace GroupProject_WpfApp.Main
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            invoicebox.IsEnabled=false;
+            isEnabled(false);
 
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
@@ -186,7 +204,7 @@ namespace GroupProject_WpfApp.Main
             InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
             CostNum.Content = 0;//to be updated once items are fixed.
 
-            ItemsList.ItemsSource = mainInventory.getONEItem(idNum);
+            ItemsList.ItemsSource = mainInventory.getSomeItem(idNum);
             taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
             TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
             
@@ -194,8 +212,13 @@ namespace GroupProject_WpfApp.Main
 
         private void isEnabled(bool tf)
         {
-            InvoiceDateBox.IsEnabled=tf;
+            bool op;
+            if (tf = true) op = false;
+            else op = true;
+
+            InvoiceDateBox.IsReadOnly=op;
             ItemDropDown.IsEnabled=tf;
+            SelectButton.IsEnabled = tf;
             SaveButton.IsEnabled=tf;
             DeleteButton.IsEnabled=tf;
         }
