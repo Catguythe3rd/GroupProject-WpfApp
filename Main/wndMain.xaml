@@ -29,13 +29,9 @@
                 <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="2" Click="newButton_Click" />
             </Grid>
         </GroupBox>
-        <DataGrid x:Name="invoice_List" Grid.Row="2"  BorderBrush="Gold" BorderThickness="5" Margin="10,10,10,10" SelectionChanged="invoice_List_SelectionChanged" >
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Delete"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid x:Name="invoice_List" Grid.Row="2"  BorderBrush="Gold" BorderThickness="5" Margin="10,10,10,10" SelectionChanged="invoice_List_SelectionChanged"/>
 
-        <Border x:Name="invoicebox" Grid.Column="1" Margin="10,10,10,10" Grid.Row="2" BorderBrush="Gold" BorderThickness="2" Background="White" IsEnabled="False">
+        <Border x:Name="invoicebox" Grid.Column="1" Margin="10,10,10,10" Grid.Row="2" BorderBrush="Gold" BorderThickness="2" Background="White" >
             <Grid x:Name="invoiceBoxGrid">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

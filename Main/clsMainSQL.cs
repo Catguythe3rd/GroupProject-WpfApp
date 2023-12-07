@@ -115,17 +115,17 @@ namespace GroupProject_WpfApp.Main
         
 
         /// <summary>
-        /// get one  item
+        /// get some  items based on invoice id
         /// </summary>
         /// <returns></returns>
-        public clsItem getONEItem()
+        public List<clsItem> getONEItem(int invoiceNum)
         { 
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             int iRet = 0;
             lstItems = new List<clsItem>();
             
-            ds = db.ExecuteSQLStatement("SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = 5000", ref iRet);
+            ds = db.ExecuteSQLStatement("SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = "+invoiceNum , ref iRet);
             
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
@@ -140,7 +140,7 @@ namespace GroupProject_WpfApp.Main
                 lstItems.Add(item);
             
             }
-            return lstItems[0];
+            return lstItems;
             
         } 
         //
