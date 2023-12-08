@@ -321,10 +321,7 @@ namespace GroupProject_WpfApp.Items
             }
         }*/
 
-<<<<<<< Updated upstream
-=======
         // Returns the selected Item to main when the window closes.
->>>>>>> Stashed changes
         private void itemWindow_Close(object sender, CancelEventArgs e)
         {
             parentWindow.itemID = selectedItem;
