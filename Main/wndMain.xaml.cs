@@ -32,7 +32,7 @@ namespace GroupProject_WpfApp.Main
         clsDataAccess db;
         #endregion
         bool edit = false;
-        internal int invoiceID;//HEY SEND ME THE INVOICE NUMBER!!!!!
+        internal int invoiceID =0;//HEY SEND ME THE INVOICE NUMBER!!!!!
         internal clsItem itemID;//SEND ME THE ITEM ID TOO!!!!
         public wndMain()
 
@@ -62,7 +62,7 @@ namespace GroupProject_WpfApp.Main
             this.Hide();
             itemWindow.ShowDialog();
             this.Show();
-            ItemDropDown.SelectedValue = itemID.ToString();
+            if(itemID != null)ItemsList.Items.Add(itemID);
            
         }
 
@@ -78,8 +78,11 @@ namespace GroupProject_WpfApp.Main
             searchWindow.ShowDialog();
             this.Show();
             //catch invoice id
-            int invoiceIndex = invoiceID - 5000;
-            invoice_List.SelectedIndex = invoiceIndex;
+            if (invoiceID != 0)
+            {
+                int invoiceIndex = invoiceID - 5000;
+                invoice_List.SelectedIndex = invoiceIndex;
+            }
 
         }
 
@@ -155,8 +158,6 @@ namespace GroupProject_WpfApp.Main
 
             //save invoice id
             newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
-            //save invoice date to invoice obj 
-            newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
             //save itemsList to invoice obj
             //save Cost to invoice obj
             newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
@@ -170,11 +171,13 @@ namespace GroupProject_WpfApp.Main
             //if new: newInvoice()
             if (edit == false)
             {
+                newInvoice.InvoiceDate = DateTime.Now;
                 mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
             }
             //if edit: editInvoice()
             else
             {
+                newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
                 mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
             }
             //hide all invoice buttons
