@@ -33,7 +33,7 @@ namespace GroupProject_WpfApp.Main
         #endregion
         bool edit = false;
         internal int invoiceID;//HEY SEND ME THE INVOICE NUMBER!!!!!
-        internal string itemID;//SEND ME THE ITEM ID TOO!!!!
+        internal clsItem itemID;//SEND ME THE ITEM ID TOO!!!!
         public wndMain()
 
         { //start window
@@ -62,7 +62,7 @@ namespace GroupProject_WpfApp.Main
             this.Hide();
             itemWindow.ShowDialog();
             this.Show();
-
+            ItemDropDown.SelectedValue = itemID.ToString();
            
         }
 
