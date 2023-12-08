@@ -20,16 +20,18 @@
         <GroupBox Header="" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Grid.ColumnSpan="2" BorderThickness="0"  Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="34*"/> 
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="ItemsButton" Content="Items" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="0" Click="ItemsButton_Click"/>
                 <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="1" Click="searchButton_Click"/>
+                <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="3" Click="EditButton_Click" />
                 <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="2" Click="newButton_Click" />
             </Grid>
         </GroupBox>
-        <DataGrid x:Name="invoice_List" Grid.Row="2"  BorderBrush="Gold" BorderThickness="5" Margin="10,10,10,10" SelectionChanged="invoice_List_SelectionChanged"/>
+        <DataGrid x:Name="invoice_List" IsReadOnly="True" Grid.Row="2"  BorderBrush="Gold" BorderThickness="5" Margin="10,10,10,10" SelectionChanged="invoice_List_SelectionChanged"/>
 
         <Border x:Name="invoicebox" Grid.Column="1" Margin="10,10,10,10" Grid.Row="2" BorderBrush="Gold" BorderThickness="2" Background="White" >
             <Grid x:Name="invoiceBoxGrid">
@@ -62,7 +64,7 @@
                 <Label x:Name="invoiceDateLabel" Content="Invoice Date: " HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
                 <Label x:Name="ItemsListLabel" Content="Items List: " HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
                 <ListBox x:Name="ItemsList" Grid.Row="4" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3"/>
-                <Button x:Name="SaveButton" IsEnabled="false" Content="Save" HorizontalAlignment="Center" Grid.Row="5" Width="128" Click="SaveButton_Click" Margin="0,8,0,7"/>
+                <Button x:Name="SaveButton" IsEnabled="false" Content="Save" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="129" Grid.Column="0" Grid.ColumnSpan="2" Click="SaveButton_Click"/>
                 <Button x:Name="DeleteButton" IsEnabled="false" Content="Delete" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="129" Grid.Column="1" Grid.ColumnSpan="2" Click="DeleteButton_Click"/>
                 <Label x:Name="CostLabel" Content="Cost: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label x:Name="TaxLabel" Content="+ Tax: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>

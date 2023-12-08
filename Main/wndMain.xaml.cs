@@ -33,7 +33,6 @@ namespace GroupProject_WpfApp.Main
         #endregion
         bool edit = false;
         static int invoiceID;
-        static string itemsID;
         public wndMain()
 
         { //start window
@@ -46,25 +45,11 @@ namespace GroupProject_WpfApp.Main
             mainInventory = new clsMainSQL();
 
             //put info into invoice and inventory list/drop down
-            InvoiceList();
-            itemsList();            
-        }
-
-        /// <summary>
-        /// binds information to invoice_list and itemDropDown
-        /// </summary>
-        private void InvoiceList()
-        {
-
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
+            ItemDropDown.ItemsSource = mainInventory.getAllItems();
         }
 
-        private void itemsList()
-        {
-
-           ItemDropDown.ItemsSource = mainInventory.getAllItems();
-
-        }
+        
 
         /// <summary>
         /// Open Items page
@@ -73,7 +58,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            wndItems item = new wndItems(this);
+            wndItems item = new wndItems();
             item.Owner = this;
             item.ShowDialog();
            
@@ -104,10 +89,16 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            isEnabled(true);
+            InvoiceDateBox.IsReadOnly = false;
+            ItemDropDown.IsEnabled = true;
+            SelectButton.IsEnabled = true;
+            SaveButton.IsEnabled = true;
+            DeleteButton.IsEnabled = true;
             int id = mainInventory.getnewID();
             //show new invoice number
             invoiceNum.Content = id;
+            //show current date
+            InvoiceDateBox.Text = DateTime.Now.ToString();
             //show current Cost
             CostNum.Content = 0;
             //show Tax Cost
@@ -130,6 +121,7 @@ namespace GroupProject_WpfApp.Main
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             //Grab item number getONEItem()
+
             ItemsList.Items.Add(ItemDropDown.SelectedItem);
 
             //split items into variables
@@ -157,32 +149,44 @@ namespace GroupProject_WpfApp.Main
         {
             //create new invoice obj
             clsMainLogic newInvoice = new clsMainLogic();
+            List<clsItem> items = new List<clsItem>();
+
             //save invoice id
             newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
             //save invoice date to invoice obj 
             newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
             //save itemsList to invoice obj
             //save Cost to invoice obj
-            newInvoice.InvoiceTotal = Int32.Parse(TotalCostNum.Content.ToString());
-            List<clsItem> items = new List<clsItem>();
-            int i = 0;
-            foreach(string s in ItemsList.Items)
+            newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
+           
+            //add items to list
+            foreach(clsItem s in ItemsList.Items)
             {
-                string[] itemvar = s.Split(" ");
-                items[i].ItemCode = itemvar[0];
-                i++;
+                items.Add(s);
             }
-              
+
             //if new: newInvoice()
-            if (edit = false)
+            if (edit == false)
             {
-                mainInventory.newInvoice( newInvoice.InvoiceDate, newInvoice.InvoiceTotal,newInvoice.ID, items);//doesn't add all info yet. 
+                mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
             }
             //if edit: editInvoice()
-            else {//doesn't add all info yet// mainInventory.editInvoice(newInvoice.ID, newInvoice.InvoiceTotal);
-                  }
+            else
+            {
+                mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
+            }
             //hide all invoice buttons
-            isEnabled(false);
+            invoice_List.ItemsSource = null;
+            invoice_List.ItemsSource = mainInventory.getAllInvoices();
+            
+
+            InvoiceDateBox.IsReadOnly = true;
+            ItemDropDown.IsEnabled = false;
+            SelectButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            DeleteButton.IsEnabled = false;
+
+            return;
         }
 
         /// <summary>
@@ -194,39 +198,58 @@ namespace GroupProject_WpfApp.Main
         {
             int num = Int32.Parse(invoiceNum.Content.ToString());
             if(invoiceNum.Content == null) { return; }
-            else  mainInventory.DeleteItemsFromInvoice(num); 
+            else  mainInventory.DeleteItemsFromInvoice(num);
+            ItemsList.Items.Clear();
         }
 
+        /// <summary>
+        /// if different invoice is selected, invoice box is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            isEnabled(false);
+            ItemsList.Items.Clear();
+            InvoiceDateBox.IsReadOnly = true;
+            ItemDropDown.IsEnabled = false;
+            SelectButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            DeleteButton.IsEnabled = false;
 
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
             clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
+            List<clsItem> items = mainInventory.getSomeItem(idNum);
             decimal cost = 0;
-            decimal tax = 0;
+            for(int i = 0; i < items.Count; i++)
+            {
+                cost += items[i].Cost;
+            }
             invoiceNum.Content = myInvoice.ID;
             InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
-            CostNum.Content = 0;//to be updated once items are fixed.
-
-            ItemsList.ItemsSource = mainInventory.getSomeItem(idNum);
-            taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
+            CostNum.Content = cost;
+            foreach(clsItem item in items)
+            {
+                ItemsList.Items.Add(item);
+            }
+            taxNum.Content =  decimal.Multiply(cost, .1m); ; //to be updated once items are fixed.
             TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
             
         }
 
-        private void isEnabled(bool tf)
+        /// <summary>
+        /// edit fuctionality start
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            bool op;
-            if (tf = true) op = false;
-            else op = true;
-
-            InvoiceDateBox.IsReadOnly=op;
-            ItemDropDown.IsEnabled=tf;
-            SelectButton.IsEnabled = tf;
-            SaveButton.IsEnabled=tf;
-            DeleteButton.IsEnabled=tf;
+            InvoiceDateBox.IsReadOnly = false;
+            ItemDropDown.IsEnabled = true;
+            SelectButton.IsEnabled = true;
+            SaveButton.IsEnabled = true;
+            DeleteButton.IsEnabled = true;
+            edit = true;
         }
     }
 }
