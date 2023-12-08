@@ -99,7 +99,7 @@
         <Label Content="Invoice Date:" HorizontalAlignment="Left" Margin="491,136,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="numberInput" HorizontalAlignment="Left" Margin="626,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
-        <ComboBox x:Name="dateDropDown" Margin="626,138,54,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectionChanged="customerDropDown_SelectionChanged"/>
+        <ComboBox x:Name="dateDropDown" Margin="626,138,54,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
 
         <Button Content=" Clear " HorizontalAlignment="Left" Margin="491,389,0,0" VerticalAlignment="Top"/>
         <Button x:Name="search" Content=" Search " HorizontalAlignment="Left" Margin="588,389,0,0" VerticalAlignment="Top" Click="Search_Click"/>
