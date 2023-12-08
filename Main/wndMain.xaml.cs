@@ -207,12 +207,13 @@ namespace GroupProject_WpfApp.Main
         {
             int num = Int32.Parse(invoiceNum.Content.ToString());
             if(invoiceNum.Content == null) { return; }
-            else  mainInventory.DeleteItemsFromInvoice(num); 
-            ItemsList.Items.Refresh();
+            else  mainInventory.DeleteItemsFromInvoice(num);
+            ItemsList.Items.Clear();
         }
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ItemsList.Items.Clear();
             InvoiceDateBox.IsReadOnly = true;
             ItemDropDown.IsEnabled = false;
             SelectButton.IsEnabled = false;
