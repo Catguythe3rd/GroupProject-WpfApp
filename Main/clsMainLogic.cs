@@ -12,6 +12,12 @@ namespace GroupProject_WpfApp.Main
         private int invoiceNum = 0;
         private DateTime invoiceDate = DateTime.Now;
         private decimal invoiceTotal = 0;
+        internal List<clsItem> clsItems = new List<clsItem>();
+
+        public List<clsItem> ClsItmes
+        {
+            get; set;
+        }
 
         public int ID
         {

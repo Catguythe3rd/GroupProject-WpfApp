@@ -32,8 +32,8 @@ namespace GroupProject_WpfApp.Main
         clsDataAccess db;
         #endregion
         bool edit = false;
-        internal int invoiceID;
-        internal string itemID;
+        internal int invoiceID;//HEY SEND ME THE INVOICE NUMBER!!!!!
+        internal string itemID;//SEND ME THE ITEM ID TOO!!!!
         public wndMain()
 
         { //start window
