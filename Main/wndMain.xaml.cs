@@ -33,7 +33,6 @@ namespace GroupProject_WpfApp.Main
         #endregion
         bool edit = false;
         static int invoiceID;
-        static string itemsID;
         public wndMain()
 
         { //start window
@@ -46,28 +45,11 @@ namespace GroupProject_WpfApp.Main
             mainInventory = new clsMainSQL();
 
             //put info into invoice and inventory list/drop down
-            InvoiceList();
-            itemsList(); 
-        }
-
-        /// <summary>
-        /// binds information to invoice_list and itemDropDown
-        /// </summary>
-        private void InvoiceList()
-        {
-
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
+            ItemDropDown.ItemsSource = mainInventory.getAllItems();
         }
 
-        /// <summary>
-        /// binds info to items Combo box
-        /// </summary>
-        private void itemsList()
-        {
-
-           ItemDropDown.ItemsSource = mainInventory.getAllItems();
-
-        }
+        
 
         /// <summary>
         /// Open Items page
