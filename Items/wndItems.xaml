@@ -63,8 +63,8 @@
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
                                 <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10" TextChanged="Edit_Code_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" TextChanged="Edit_Description_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" TextChanged="Edit_Cost_TextBox_TextChanged" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
                             </StackPanel>
                         </StackPanel>
 
