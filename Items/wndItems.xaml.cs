@@ -1,6 +1,7 @@
 ﻿using GroupProject_WpfApp.Main;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -284,7 +285,7 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
-        private void itemWindow_Close()
+        private void itemWindow_Close(object sender, CancelEventArgs e)
         {
             parentWindow.itemID = selectedItem;
         }

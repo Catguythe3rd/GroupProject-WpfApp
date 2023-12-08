@@ -32,8 +32,10 @@ namespace GroupProject_WpfApp.Main
         clsDataAccess db;
         #endregion
         bool edit = false;
+        bool newI = false;
         internal int invoiceID =0;//HEY SEND ME THE INVOICE NUMBER!!!!!
         internal clsItem itemID;//SEND ME THE ITEM ID TOO!!!!
+
         public wndMain()
 
         { //start window
@@ -62,8 +64,9 @@ namespace GroupProject_WpfApp.Main
             this.Hide();
             itemWindow.ShowDialog();
             this.Show();
-            if(itemID != null)ItemsList.Items.Add(itemID);
-           
+            if (itemID != null && newI == true)ItemsList.Items.Add(itemID);
+            if(itemID != null && edit == true) ItemsList.Items.Add(itemID);
+
         }
 
         /// <summary>
@@ -99,6 +102,7 @@ namespace GroupProject_WpfApp.Main
             SelectButton.IsEnabled = true;
             SaveButton.IsEnabled = true;
             DeleteButton.IsEnabled = true;
+            newI = true;
             int id = mainInventory.getnewID();
             //show new invoice number
             invoiceNum.Content = id;
@@ -181,15 +185,15 @@ namespace GroupProject_WpfApp.Main
                 mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
             }
             //hide all invoice buttons
-            invoice_List.ItemsSource = null;
-            invoice_List.ItemsSource = mainInventory.getAllInvoices();
-            
+            invoice_List.Items.Refresh();
 
             InvoiceDateBox.IsReadOnly = true;
             ItemDropDown.IsEnabled = false;
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
+            edit = false;
+            newI = false;
 
             return;
         }
