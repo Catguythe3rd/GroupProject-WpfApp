@@ -59,9 +59,10 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            //wndItems item = new wndItems();
-            itemWindow.Owner = this;
+            this.Hide();
             itemWindow.ShowDialog();
+            this.Show();
+
            
         }
 
@@ -74,11 +75,11 @@ namespace GroupProject_WpfApp.Main
         {
             
             this.Hide();
-            searchWindow.Show();
-            //invoiceID = searchWindow.// insert searWindowClassName here
+            searchWindow.ShowDialog();
             this.Show();
             //catch invoice id
-            //invoiceList.selectedIndex = invoiceID
+            int invoiceIndex = invoiceID - 5000;
+            invoice_List.SelectedIndex = invoiceIndex;
 
         }
 
