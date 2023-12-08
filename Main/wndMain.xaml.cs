@@ -73,13 +73,10 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            //hide main
-            this.Hide();
-        
-            //open items page
-            itemWindow.Show();
-            
-            this.Show();
+            wndItems item = new wndItems(this);
+            item.Owner = this;
+            item.ShowDialog();
+           
         }
 
         /// <summary>
@@ -167,10 +164,19 @@ namespace GroupProject_WpfApp.Main
             //save itemsList to invoice obj
             //save Cost to invoice obj
             newInvoice.InvoiceTotal = Int32.Parse(TotalCostNum.Content.ToString());
+            List<clsItem> items = new List<clsItem>();
+            int i = 0;
+            foreach(string s in ItemsList.Items)
+            {
+                string[] itemvar = s.Split(" ");
+                items[i].ItemCode = itemvar[0];
+                i++;
+            }
+              
             //if new: newInvoice()
             if (edit = false)
             {
-               // mainInventory.newInvoice();//doesn't add all info yet. 
+                mainInventory.newInvoice( newInvoice.InvoiceDate, newInvoice.InvoiceTotal,newInvoice.ID, items);//doesn't add all info yet. 
             }
             //if edit: editInvoice()
             else {//doesn't add all info yet// mainInventory.editInvoice(newInvoice.ID, newInvoice.InvoiceTotal);

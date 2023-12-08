@@ -74,14 +74,19 @@ namespace GroupProject_WpfApp.Main
         }
         
         
-        public void newInvoice()
+        public void newInvoice(DateTime date, decimal Cost, int invoiceID, List<clsItem> itemID)
         {
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
         
-            db.ExecuteNonQuery("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)");
-        
-            
+            db.ExecuteNonQuery("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#"+date+"#, "+Cost+")");
+            for(int i = 0; i < itemID.Count; i++)
+            {
+
+                db.ExecuteScalarSQL("INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(" + invoiceID + ", " + i + ", '" + itemID + "')");
+            }
+
+
         }
         
         /// <summary>
@@ -186,6 +191,22 @@ namespace GroupProject_WpfApp.Main
             }
             id++;
 
+
+            return id;
+        }
+
+        public string getnewIDItem()
+        {
+            List<clsItem> list = getAllItems();
+            int idnum = list.Count + 1;
+            idnum = idnum - 24;
+            string id = "";
+
+            for(int i = 0; i < list.Count; i++)
+            {
+                id = list[i].ItemCode;
+            }
+            id += idnum;
 
             return id;
         }
