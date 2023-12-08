@@ -170,7 +170,7 @@ namespace GroupProject_WpfApp.Main
             //save invoice id
             newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
             //save invoice date to invoice obj 
-            newInvoice.InvoiceDate = DateTime.Now;
+            newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
             //save itemsList to invoice obj
             //save Cost to invoice obj
             newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
@@ -187,14 +187,21 @@ namespace GroupProject_WpfApp.Main
                 mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
             }
             //if edit: editInvoice()
-            else mainInventory.editInvoice(newInvoice.InvoiceTotal, newInvoice.ID, items);
+            else
+            {
+                mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
+            }
             //hide all invoice buttons
-            invoice_List.Items.Refresh();
+            invoice_List.ItemsSource = null;
+            invoice_List.ItemsSource = mainInventory.getAllInvoices();
+            
+
             InvoiceDateBox.IsReadOnly = true;
             ItemDropDown.IsEnabled = false;
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
+
             return;
         }
 
@@ -211,6 +218,11 @@ namespace GroupProject_WpfApp.Main
             ItemsList.Items.Clear();
         }
 
+        /// <summary>
+        /// if different invoice is selected, invoice box is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemsList.Items.Clear();
@@ -241,6 +253,11 @@ namespace GroupProject_WpfApp.Main
             
         }
 
+        /// <summary>
+        /// edit fuctionality start
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             InvoiceDateBox.IsReadOnly = false;

@@ -163,11 +163,12 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         /// <param name="invoiceID"></param>
         /// <param name="TotalCost"></param>
-        public void editInvoice(decimal Cost, int invoiceID, List<clsItem> itemID)
+        public void editInvoice(DateTime date,decimal Cost, int invoiceID, List<clsItem> itemID)
         {
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + Cost + " WHERE InvoiceNum = " + invoiceID);
+            db.ExecuteNonQuery("UPDATE Invoices SET InvoiceDate = '" + date +"' where InvoiceNum = "+ invoiceID);
             DeleteItemsFromInvoice (invoiceID);
             for (int i = 0; i < itemID.Count; i++)
             {
