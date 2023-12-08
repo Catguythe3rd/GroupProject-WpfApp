@@ -32,7 +32,8 @@ namespace GroupProject_WpfApp.Main
         clsDataAccess db;
         #endregion
         bool edit = false;
-        static int invoiceID;
+        internal int invoiceID;
+        internal string itemID;
         public wndMain()
 
         { //start window
@@ -40,10 +41,10 @@ namespace GroupProject_WpfApp.Main
             //show other windows
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
            
-            searchWindow = new wndSearch(); 
+            searchWindow = new wndSearch(this); 
             itemWindow = new wndItems();
             mainInventory = new clsMainSQL();
-
+            
             //put info into invoice and inventory list/drop down
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
             ItemDropDown.ItemsSource = mainInventory.getAllItems();
@@ -71,10 +72,10 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
             this.Hide();
             searchWindow.Show();
-            //invoiceID = searchWindow. insert searWindowClassName here
+            //invoiceID = searchWindow.// insert searWindowClassName here
             this.Show();
             //catch invoice id
             //invoiceList.selectedIndex = invoiceID
