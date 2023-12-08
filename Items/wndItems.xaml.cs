@@ -284,6 +284,11 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
+        private void itemWindow_Close()
+        {
+            parentWindow.itemID = selectedItem;
+        }
+
         private void HandleError(string sClass, string sMethod, string sMessage)
         {
             try

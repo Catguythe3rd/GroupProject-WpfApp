@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupProject_WpfApp.Items"
         mc:Ignorable="d"
-        Title="Item Inventory" Height="530" Width="820" Background="RoyalBlue">
+        Title="Item Inventory" Height="530" Width="820" Background="RoyalBlue"
+        Closing="itemWindow_Close">
 
     <!-- This handles the style of the grid-space buttons-->
     <Window.Resources>
