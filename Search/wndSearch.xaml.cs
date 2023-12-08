@@ -67,7 +67,7 @@ namespace GroupProject_WpfApp.Search
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Edit_Click(object sender, RoutedEventArgs e)
         {
             editInvoice editWindow = new editInvoice(this);
             editWindow.Owner = this;
