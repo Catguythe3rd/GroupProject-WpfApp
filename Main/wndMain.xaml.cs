@@ -223,20 +223,20 @@ namespace GroupProject_WpfApp.Main
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
             clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
-
+            List<clsItem> items = mainInventory.getSomeItem(idNum);
             decimal cost = 0;
-            decimal tax = 0;
+            for(int i = 0; i < items.Count; i++)
+            {
+                cost += items[i].Cost;
+            }
             invoiceNum.Content = myInvoice.ID;
             InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
-            CostNum.Content = 0;//to be updated once items are fixed.
-
-
-            List<clsItem> items = mainInventory.getSomeItem(idNum);
+            CostNum.Content = cost;
             foreach(clsItem item in items)
             {
                 ItemsList.Items.Add(item);
             }
-            taxNum.Content =  decimal.Multiply(cost, tax); ; //to be updated once items are fixed.
+            taxNum.Content =  decimal.Multiply(cost, .1m); ; //to be updated once items are fixed.
             TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
             
         }
