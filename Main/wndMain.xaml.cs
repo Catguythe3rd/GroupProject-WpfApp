@@ -48,7 +48,6 @@ namespace GroupProject_WpfApp.Main
             //put info into invoice and inventory list/drop down
             InvoiceList();
             itemsList(); 
-            invoice_List.IsReadOnly = true;
         }
 
         /// <summary>
@@ -60,6 +59,9 @@ namespace GroupProject_WpfApp.Main
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
         }
 
+        /// <summary>
+        /// binds info to items Combo box
+        /// </summary>
         private void itemsList()
         {
 
