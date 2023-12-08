@@ -151,10 +151,5 @@ namespace GroupProject_WpfApp.Search
                 }
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
