@@ -42,5 +42,22 @@ namespace GroupProject_WpfApp
         {
             return invoiceTotal;
         }
+
+        public void setNumber(int invoiceNumber)
+        {
+            this.invoiceNumber = invoiceNumber;
+        }
+
+        public void setTotal(String invoiceTotal)
+        {
+            this.invoiceTotal = decimal.Parse(invoiceTotal);
+
+        }
+
+        public void setDate(DateTime invoiceDate)
+        {
+            this.invoiceDate = invoiceDate;
+        }
+
     }
 }
