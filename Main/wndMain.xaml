@@ -20,12 +20,14 @@
         <GroupBox Header="" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Grid.ColumnSpan="2" BorderThickness="0"  Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="34*"/> 
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="ItemsButton" Content="Items" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="0" Click="ItemsButton_Click"/>
                 <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="1" Click="searchButton_Click"/>
+                <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="3" Click="EditButton_Click" />
                 <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29" Width="199" Grid.Column="2" Click="newButton_Click" />
             </Grid>
         </GroupBox>

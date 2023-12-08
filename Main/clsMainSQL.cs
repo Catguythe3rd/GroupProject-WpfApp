@@ -102,19 +102,15 @@ namespace GroupProject_WpfApp.Main
          
              ds = db.ExecuteSQLStatement("SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = "+ id, ref iRet);
          
-             foreach (DataRow dr in ds.Tables[0].Rows)
-             {
-         
                  clsMainLogic Invoice = new clsMainLogic();
-                 Invoice.ID = int.Parse(dr[0].ToString());
-                 Invoice.InvoiceDate = DateTime.Parse(dr[1].ToString());
-                 Invoice.InvoiceTotal = decimal.Parse(dr[2].ToString());
+
+                 Invoice.ID = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+                 Invoice.InvoiceDate = DateTime.Parse(ds.Tables[0].Rows[0][1].ToString());
+                 Invoice.InvoiceTotal = decimal.Parse(ds.Tables[0].Rows[0][2].ToString());
+                    
          
+                 return Invoice;
          
-                 lstInvoices.Add(Invoice);
-         
-             }
-             return lstInvoices[0];
          }
         
 
@@ -172,6 +168,7 @@ namespace GroupProject_WpfApp.Main
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + Cost + " WHERE InvoiceNum = " + invoiceID);
+            DeleteItemsFromInvoice (invoiceID);
             for (int i = 0; i < itemID.Count; i++)
             {
                 db.ExecuteScalarSQL("INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(" + invoiceID + ", " + i + ", '" + itemID[i].ItemCode + "')");
