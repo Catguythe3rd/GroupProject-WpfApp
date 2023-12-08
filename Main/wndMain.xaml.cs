@@ -66,6 +66,7 @@ namespace GroupProject_WpfApp.Main
             this.Show();
             if (itemID != null && newI == true)ItemsList.Items.Add(itemID);
             if(itemID != null && edit == true) ItemsList.Items.Add(itemID);
+            ItemDropDown.ItemsSource = mainInventory.getAllItems();
 
         }
 
@@ -86,6 +87,7 @@ namespace GroupProject_WpfApp.Main
                 int invoiceIndex = invoiceID - 5000;
                 invoice_List.SelectedIndex = invoiceIndex;
             }
+            ItemDropDown.ItemsSource = mainInventory.getAllInvoices();
 
         }
 
