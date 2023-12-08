@@ -23,32 +23,28 @@ namespace GroupProject_WpfApp.Items
     public partial class wndItems : Window
     {
         #region TestRegion_Variables
-        clsItemsLogic clsItemsLogic;
-        clsItem selectedItem;
-/*
-        public bool isValid_Edit_Cost = false;
-        public bool isValid_Edit_Name = false;
-        public bool isValid_Edit_Description = false;*/
 
-        public bool isValid_editItemInputs = false;
+        wndMain parentWindow;
+        clsItemsLogic clsItemsLogic;    // 
+        clsItem selectedItem;           // The cureently selected item in the list.
+        List<clsItem> itemsList;        // list of jewelery items
 
-
-        public bool isValid_Search_Cost = false;
-        public bool isValid_Search_Name = false;
-        public bool isValid_Search_Description = false;
+        bool userHasChangedItemCodeTextBox = false;
+        bool userHasEnteredNewItemCode = false;
         #endregion
 
         /// <summary>
         /// Contrustor
         /// </summary>
-        public wndItems()
+        internal wndItems(wndMain parent)
         {
             try
             {
                 InitializeComponent();
+                this.parentWindow = parent;
 
-                clsItemsLogic = new clsItemsLogic();    // Initializes item logic script.
-                List<clsItem> itemsList = clsItemsLogic.getAllItems();  // Stores a list of the items from the database.
+                clsItemsLogic = new clsItemsLogic();            // Initializes item logic script.
+                itemsList = clsItemsLogic.getAllItems();        // Stores a list of the items from the database.
                 itemsTable_DataGrid.ItemsSource = itemsList;    // Sets the datagrid to the list of items.
             }
             catch (Exception ex)
@@ -150,6 +146,9 @@ namespace GroupProject_WpfApp.Items
                 Edit_Code_TextBox.Text = selectedItem.ItemCode;
                 Edit_Description_TextBox.Text = selectedItem.ItemDesc;
                 Edit_Cost_TextBox.Text = selectedItem.Cost.ToString(); // cost is in decimal, so converts to string.
+
+                // Since new info has loaded into the cost textbox, the saved values haven't been changed by the user.
+                userHasChangedItemCodeTextBox = false;
             }
             catch (Exception ex)
             {
@@ -162,9 +161,15 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                if (isValid_editItemInputs == true)
+                // The item code will be different when a user is trying to create a new item, 
+                // so they can't click save. Only click "create new".
+                if (userHasEnteredNewItemCode == false)
                 {
                     clsItemsLogic.updateItem(selectedItem.ItemDesc, selectedItem.Cost, selectedItem.ItemCode);
+                }
+                else
+                {
+                    UpdateErrorLabel();
                 }
             }
             catch (Exception ex)
@@ -173,6 +178,8 @@ namespace GroupProject_WpfApp.Items
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+        
+        /*
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -185,7 +192,7 @@ namespace GroupProject_WpfApp.Items
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
-        }
+        }*/
 
         private void txtLetterInput_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -232,81 +239,36 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
+        /// <summary>
+        /// When the testbox is changed, it checks whether the item code has been changed by the user.
+        /// If its a different code than one in the list, then the user can create a new item.
+        /// If its the same code as one in the list, then the user can update the corresponding item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Edit_Code_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /*try
-            {
-                HasBeenSaved_editedItem = false;
-            }
-            catch (Exception ex)
-            {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }*/
-        }
-
-        private void Edit_Description_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           /* try
-            {
-                HasBeenSaved_editedItem = false;
-            }
-            catch (Exception ex)
-            {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }*/
-        }
-
-        private void Edit_Cost_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            /*try
-            {
-                HasBeenSaved_editedItem = false;
-            }
-            catch (Exception ex)
-            {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }*/
-        }
-
-        private void Search_Code_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
             try
             {
+                if (userHasChangedItemCodeTextBox == false)
+                {
+                    userHasEnteredNewItemCode = true;   // Is true by default,
+                                                        // if a duplicate is found in the list, its set to false.
 
+                    for (int i = 0; i < itemsList.Count; i++)
+                    {
+                        if (Edit_Code_TextBox.Text == itemsList[i].ItemCode)
+                        {
+                            userHasEnteredNewItemCode = false;
+                            break;
+                        }
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-
-        private void Search_Description_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-
-        private void Search_Cost_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -314,7 +276,7 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                
+                EditError_Label.Content = "ID code can only be changed when creating a new Item.";
             }
             catch (Exception ex)
             {

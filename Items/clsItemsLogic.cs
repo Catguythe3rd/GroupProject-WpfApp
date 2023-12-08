@@ -10,23 +10,6 @@ namespace GroupProject_WpfApp.Items
 {
     public class clsItemsLogic
     {
-        // When Main window initializes, Items window will be initialized with items list,
-        // and Search window will be initialized with invoice list. 
-
-        // A button in main will call a new itmes window.
-        // This will call constructor and update the items list with sql data.
-        // When user closes the items window with either x or esscape, 
-        // main window will call a function or reset a variable that represents the list of
-        // items from itme window.
-
-
-
-
-        // Variables Not Yet Implemented
-        static List<clsItem> items; // I'm not sure whether I'll update database after itemsWindow,
-                                    // meaning acts as a temperary list.
-
-
         clsItemsSQL clsItemsSQL;
 
         public clsItemsLogic()
