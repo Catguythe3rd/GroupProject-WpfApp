@@ -98,18 +98,16 @@ namespace GroupProject_WpfApp.Main
              clsDataAccess db = new clsDataAccess();
              DataSet ds = new DataSet();
              int iRet = 0;
-             lstInvoices = new List<clsMainLogic>();
+            clsMainLogic invoice = new clsMainLogic();
+            ds = db.ExecuteSQLStatement("SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = "+ id, ref iRet);
          
-             ds = db.ExecuteSQLStatement("SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = "+ id, ref iRet);
-         
-                 clsMainLogic Invoice = new clsMainLogic();
+                 
 
-                 Invoice.ID = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-                 Invoice.InvoiceDate = DateTime.Parse(ds.Tables[0].Rows[0][1].ToString());
-                 Invoice.InvoiceTotal = decimal.Parse(ds.Tables[0].Rows[0][2].ToString());
-                    
-         
-                 return Invoice;
+            invoice.ID = Int32.Parse(ds.Tables[0].Rows[0][0].ToString());
+            invoice.InvoiceDate = DateTime.Parse(ds.Tables[0].Rows[0][1].ToString());
+            invoice.InvoiceTotal = decimal.Parse(ds.Tables[0].Rows[0][2].ToString());
+
+            return invoice;
          
          }
         

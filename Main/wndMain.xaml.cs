@@ -177,6 +177,7 @@ namespace GroupProject_WpfApp.Main
             {
                 newInvoice.InvoiceDate = DateTime.Now;
                 mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
+                newI = false;
             }
             //if edit: editInvoice()
             else
@@ -185,15 +186,13 @@ namespace GroupProject_WpfApp.Main
                 mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
             }
             //hide all invoice buttons
-            invoice_List.Items.Refresh();
+            invoice_List.ItemsSource = mainInventory.getAllInvoices();
 
             InvoiceDateBox.IsReadOnly = true;
             ItemDropDown.IsEnabled = false;
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
-            edit = false;
-            newI = false;
 
             return;
         }
@@ -227,6 +226,7 @@ namespace GroupProject_WpfApp.Main
 
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
+            if(idNum < 5000) idNum = 5000;
             clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
             List<clsItem> items = mainInventory.getSomeItem(idNum);
             decimal cost = 0;
