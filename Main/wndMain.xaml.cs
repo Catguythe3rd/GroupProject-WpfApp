@@ -73,7 +73,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            wndItems item = new wndItems(this);
+            wndItems item = new wndItems();
             item.Owner = this;
             item.ShowDialog();
            
@@ -104,10 +104,16 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            isEnabled(true);
+            InvoiceDateBox.IsReadOnly = false;
+            ItemDropDown.IsEnabled = true;
+            SelectButton.IsEnabled = true;
+            SaveButton.IsEnabled = true;
+            DeleteButton.IsEnabled = true;
             int id = mainInventory.getnewID();
             //show new invoice number
             invoiceNum.Content = id;
+            //show current date
+            InvoiceDateBox.Text = DateTime.Now.ToString();
             //show current Cost
             CostNum.Content = 0;
             //show Tax Cost
@@ -157,32 +163,37 @@ namespace GroupProject_WpfApp.Main
         {
             //create new invoice obj
             clsMainLogic newInvoice = new clsMainLogic();
+            List<clsItem> items = new List<clsItem>();
+
             //save invoice id
             newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
             //save invoice date to invoice obj 
-            newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
+            newInvoice.InvoiceDate = DateTime.Now;
             //save itemsList to invoice obj
             //save Cost to invoice obj
-            newInvoice.InvoiceTotal = Int32.Parse(TotalCostNum.Content.ToString());
-            List<clsItem> items = new List<clsItem>();
-            int i = 0;
-            foreach(string s in ItemsList.Items)
+            newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
+           
+            //add items to list
+            foreach(clsItem s in ItemsList.Items)
             {
-                string[] itemvar = s.Split(" ");
-                items[i].ItemCode = itemvar[0];
-                i++;
+                items.Add(s);
             }
-              
+
             //if new: newInvoice()
-            if (edit = false)
+            if (edit == false)
             {
-                mainInventory.newInvoice( newInvoice.InvoiceDate, newInvoice.InvoiceTotal,newInvoice.ID, items);//doesn't add all info yet. 
+                mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
             }
             //if edit: editInvoice()
-            else {//doesn't add all info yet// mainInventory.editInvoice(newInvoice.ID, newInvoice.InvoiceTotal);
-                  }
+            else mainInventory.editInvoice(newInvoice.InvoiceTotal, newInvoice.ID, items);
             //hide all invoice buttons
-            isEnabled(false);
+            InvoiceList();
+            InvoiceDateBox.IsReadOnly = true;
+            ItemDropDown.IsEnabled = false;
+            SelectButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            DeleteButton.IsEnabled = false;
+            return;
         }
 
         /// <summary>
@@ -199,7 +210,11 @@ namespace GroupProject_WpfApp.Main
 
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            isEnabled(false);
+            InvoiceDateBox.IsReadOnly = true;
+            ItemDropDown.IsEnabled = false;
+            SelectButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            DeleteButton.IsEnabled = false;
 
             int idNum = invoice_List.SelectedIndex;
             idNum+=5000;
@@ -216,17 +231,6 @@ namespace GroupProject_WpfApp.Main
             
         }
 
-        private void isEnabled(bool tf)
-        {
-            bool op;
-            if (tf = true) op = false;
-            else op = true;
-
-            InvoiceDateBox.IsReadOnly=op;
-            ItemDropDown.IsEnabled=tf;
-            SelectButton.IsEnabled = tf;
-            SaveButton.IsEnabled=tf;
-            DeleteButton.IsEnabled=tf;
-        }
+        
     }
 }

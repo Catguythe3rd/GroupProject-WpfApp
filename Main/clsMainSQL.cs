@@ -81,9 +81,8 @@ namespace GroupProject_WpfApp.Main
         
             db.ExecuteNonQuery("INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#"+date+"#, "+Cost+")");
             for(int i = 0; i < itemID.Count; i++)
-            {
-
-                db.ExecuteScalarSQL("INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(" + invoiceID + ", " + i + ", '" + itemID + "')");
+            { 
+                db.ExecuteScalarSQL("INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(" + invoiceID + ", " + i + ", '" + itemID[i].ItemCode + "')");
             }
 
 
@@ -168,13 +167,16 @@ namespace GroupProject_WpfApp.Main
         /// </summary>
         /// <param name="invoiceID"></param>
         /// <param name="TotalCost"></param>
-        public void editInvoice(int invoiceID, decimal TotalCost)
+        public void editInvoice(decimal Cost, int invoiceID, List<clsItem> itemID)
         {
-
             clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
-
-            db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + TotalCost +" WHERE InvoiceNum = "+invoiceID);
+            db.ExecuteNonQuery("UPDATE Invoices SET TotalCost = " + Cost + " WHERE InvoiceNum = " + invoiceID);
+            for (int i = 0; i < itemID.Count; i++)
+            {
+                db.ExecuteScalarSQL("INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(" + invoiceID + ", " + i + ", '" + itemID[i].ItemCode + "')");
+            }
+            
         }
 
         /// <summary>
