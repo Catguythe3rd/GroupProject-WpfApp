@@ -47,4 +47,3 @@ namespace GroupProject_WpfApp.Search
             }
         }
     }
-}
