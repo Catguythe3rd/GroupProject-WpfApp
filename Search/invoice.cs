@@ -27,5 +27,20 @@ namespace GroupProject_WpfApp
             //Maybe, instead I can call on one of the SQL classes to do this for me. I could A, make a function in my sql class to do this or
             //B, call one in the clsItemsSQL class since that one is already searching for items!
         }
+
+        public DateTime getDate()
+        {
+            return invoiceDate;
+        }
+
+        public int getNumber()
+        {
+            return invoiceNumber;
+        }
+
+        public decimal getTotal()
+        {
+            return invoiceTotal;
+        }
     }
 }
