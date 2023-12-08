@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -25,9 +26,9 @@ namespace GroupProject_WpfApp.Items
     {
         #region TestRegion_Variables
 
-        wndMain parentWindow;
-        clsItemsLogic clsItemsLogic;    // 
-        clsItem selectedItem;           // The cureently selected item in the list.
+        wndMain parentWindow;           // Allow manipulating variables of the arleady existing main function.
+        clsItemsLogic clsItemsLogic;    // Link to the logic class.
+        clsItem? selectedItem;           // The cureently selected item in the list.
         List<clsItem> itemsList;        // list of jewelery items
 
         bool userHasChangedItemCodeTextBox = false;
@@ -42,11 +43,15 @@ namespace GroupProject_WpfApp.Items
             try
             {
                 InitializeComponent();
-                this.parentWindow = parent;
+                this.parentWindow = parent;                                  
 
-                clsItemsLogic = new clsItemsLogic();            // Initializes item logic script.
-                itemsList = clsItemsLogic.getAllItems();        // Stores a list of the items from the database.
-                itemsTable_DataGrid.ItemsSource = itemsList;    // Sets the datagrid to the list of items.
+                clsItemsLogic = new clsItemsLogic();                // Initializes item logic script.
+                itemsList = clsItemsLogic.getAllItems();            // Stores a list of the items from the database.
+                itemsTable_DataGrid.ItemsSource = itemsList;        // Sets the datagrid to the list of items.
+                EditError_Label.Visibility = Visibility.Collapsed;  // Closes error box before starting the program.
+
+                save_Button.IsEnabled = false;
+                delete_Button.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -55,11 +60,11 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
-        private void new_Button_Click(object sender, RoutedEventArgs e)
+        private void add_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
+                clsItemsLogic.insertItem(Edit_Code_TextBox.Text, Edit_Description_TextBox.Text, Decimal.Parse(Edit_Cost_TextBox.Text));
             }
             catch (Exception ex)
             {
@@ -72,7 +77,30 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
+                if (selectedItem == null)
+                {
+                    // error label
+                }
+                else
+                {
+                    // must check if selected item is in an existing invoice, if so don't allow delete, update error label.
+                    clsItemsLogic.deleteItem(selectedItem.ItemCode); // Deletes item from database.
+                    itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
+                    itemsTable_DataGrid.ItemsSource = itemsList;     // Reloads datagrid with items from list.
+                    selectedItem = null;                             // Sets slected item to default.
 
+                    // Sets the values in the Edit Items group box to initial null values.
+                    Edit_Code_TextBox.Text = null;
+                    Edit_Description_TextBox.Text = null;
+                    Edit_Cost_TextBox.Text = null; // cost is in decimal, so converts to string.
+
+                    // Disables save and delete buttons
+                    save_Button.IsEnabled = false;
+                    delete_Button.IsEnabled = false;
+
+                    // Collapses error label
+                    EditError_Label.Visibility = Visibility.Collapsed;
+                }
             }
             catch (Exception ex)
             {
@@ -162,16 +190,8 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                // The item code will be different when a user is trying to create a new item, 
-                // so they can't click save. Only click "create new".
-                if (userHasEnteredNewItemCode == false)
-                {
-                    clsItemsLogic.updateItem(selectedItem.ItemDesc, selectedItem.Cost, selectedItem.ItemCode);
-                }
-                else
-                {
-                    UpdateErrorLabel();
-                }
+                clsItemsLogic.updateItem(selectedItem.ItemDesc, selectedItem.Cost, selectedItem.ItemCode);
+                EditError_Label.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -265,6 +285,8 @@ namespace GroupProject_WpfApp.Items
                         }
                     }
                 }
+
+                //UpdateErrorLabel();
             }
             catch (System.Exception ex)
             {
@@ -273,18 +295,36 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
-        public void UpdateErrorLabel()
+        /*public void UpdateErrorLabel()
         {
             try
             {
-                EditError_Label.Content = "ID code can only be changed when creating a new Item.";
+                if (userHasEnteredNewItemCode == true)
+                {
+                    EditError_Label.Visibility = Visibility.Visible;
+                    EditError_Label.Text = "Warning: ID code can only be changed when creating a new Item.";
+                    save_Button.IsEnabled = false;
+                    add_Button.IsEnabled = true;
+                }
+                else if (userHasEnteredNewItemCode == false)
+                {
+                    EditError_Label.IsEnabled = true;
+                    EditError_Label.Visibility = Visibility.Visible;
+                    EditError_Label.Text = "Warning: ID code can only be changed when creating a new Item.";
+                    save_Button.IsEnabled = true;
+                    add_Button.IsEnabled = false;
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
             }
-        }
+        }*/
 
+<<<<<<< Updated upstream
+=======
+        // Returns the selected Item to main when the window closes.
+>>>>>>> Stashed changes
         private void itemWindow_Close(object sender, CancelEventArgs e)
         {
             parentWindow.itemID = selectedItem;
