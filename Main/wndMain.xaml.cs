@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ using System.Windows.Media.Converters;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace GroupProject_WpfApp.Main
 {
@@ -61,12 +63,19 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            itemWindow.ShowDialog();
-            this.Show();
-            if (itemID != null && newI == true)ItemsList.Items.Add(itemID);
-            if(itemID != null && edit == true) ItemsList.Items.Add(itemID);
-            ItemDropDown.ItemsSource = mainInventory.getAllItems();
+            try
+            {
+                this.Hide();
+                itemWindow.ShowDialog();
+                this.Show();
+                if (itemID != null && newI == true) ItemsList.Items.Add(itemID);
+                if (itemID != null && edit == true) ItemsList.Items.Add(itemID);
+                ItemDropDown.ItemsSource = mainInventory.getAllItems();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
 
         }
 
@@ -77,17 +86,24 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            this.Hide();
-            searchWindow.ShowDialog();
-            this.Show();
-            //catch invoice id
-            if (invoiceID != 0)
+            try
             {
-                int invoiceIndex = invoiceID - 5000;
-                invoice_List.SelectedIndex = invoiceIndex;
+                this.Hide();
+                searchWindow.ShowDialog();
+                this.Show();
+                //catch invoice id
+                if (invoiceID != 0)
+                {
+                    int invoiceIndex = invoiceID - 5000;
+                    invoice_List.SelectedIndex = invoiceIndex;
+                }
+                ItemDropDown.ItemsSource = mainInventory.getAllInvoices();
             }
-            ItemDropDown.ItemsSource = mainInventory.getAllInvoices();
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+
 
         }
 
@@ -99,6 +115,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
+            try{ 
             InvoiceDateBox.IsReadOnly = false;
             ItemDropDown.IsEnabled = true;
             SelectButton.IsEnabled = true;
@@ -117,12 +134,17 @@ namespace GroupProject_WpfApp.Main
             //show Total Cost
             TotalCostNum.Content = 0;
             //Show date
-            InvoiceDateBox.Text ="";
+            InvoiceDateBox.Text = "";
             //items list
             ItemsList.ItemsSource = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
 
         }
-         
+
 
         /// <summary>
         /// send selected inventory obj from drop down to items list
@@ -131,6 +153,7 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             //Grab item number getONEItem()
 
             ItemsList.Items.Add(ItemDropDown.SelectedItem);
@@ -139,17 +162,23 @@ namespace GroupProject_WpfApp.Main
             string item = ItemDropDown.SelectedItem.ToString();
             string[] itemVar = item.Split(' ');
             string itemCost = "";
-            for(int i = 0; i  < itemVar.Length; i++) {
-             itemCost = itemVar[i];
+            for (int i = 0; i < itemVar.Length; i++)
+            {
+                itemCost = itemVar[i];
             }
             decimal Cost = Convert.ToDecimal(CostNum.Content) + Convert.ToDecimal(itemCost);
 
             //add item Description and cost it ItemsList
             CostNum.Content = Cost;
             taxNum.Content = decimal.Multiply(Cost, .1m);
-            decimal TotalCost =  Convert.ToDecimal(taxNum.Content) + Cost;
+            decimal TotalCost = Convert.ToDecimal(taxNum.Content) + Cost;
             TotalCostNum.Content = TotalCost;
         }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+    }
+}
 
         /// <summary>
         /// save edited to correct invoice
@@ -158,6 +187,8 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            try 
+            { 
             //create new invoice obj
             clsMainLogic newInvoice = new clsMainLogic();
             List<clsItem> items = new List<clsItem>();
@@ -167,9 +198,9 @@ namespace GroupProject_WpfApp.Main
             //save itemsList to invoice obj
             //save Cost to invoice obj
             newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
-           
+
             //add items to list
-            foreach(clsItem s in ItemsList.Items)
+            foreach (clsItem s in ItemsList.Items)
             {
                 items.Add(s);
             }
@@ -195,6 +226,11 @@ namespace GroupProject_WpfApp.Main
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
 
             return;
         }
@@ -219,33 +255,41 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void invoice_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ItemsList.Items.Clear();
-            InvoiceDateBox.IsReadOnly = true;
-            ItemDropDown.IsEnabled = false;
-            SelectButton.IsEnabled = false;
-            SaveButton.IsEnabled = false;
-            DeleteButton.IsEnabled = false;
+            try
+            {
+                ItemsList.Items.Clear();
+                InvoiceDateBox.IsReadOnly = true;
+                ItemDropDown.IsEnabled = false;
+                SelectButton.IsEnabled = false;
+                SaveButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
 
-            int idNum = invoice_List.SelectedIndex;
-            idNum+=5000;
-            if(idNum < 5000) idNum = 5000;
-            clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
-            List<clsItem> items = mainInventory.getSomeItem(idNum);
-            decimal cost = 0;
-            for(int i = 0; i < items.Count; i++)
-            {
-                cost += items[i].Cost;
+                int idNum = invoice_List.SelectedIndex;
+                idNum += 5000;
+                if (idNum < 5000) idNum = 5000;
+                clsMainLogic myInvoice = mainInventory.getOneInvoice(idNum);
+                List<clsItem> items = mainInventory.getSomeItem(idNum);
+                decimal cost = 0;
+                for (int i = 0; i < items.Count; i++)
+                {
+                    cost += items[i].Cost;
+                }
+                invoiceNum.Content = myInvoice.ID;
+                InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
+                CostNum.Content = cost;
+                foreach (clsItem item in items)
+                {
+                    ItemsList.Items.Add(item);
+                }
+                taxNum.Content = decimal.Multiply(cost, .1m); ; //to be updated once items are fixed.
+                TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
             }
-            invoiceNum.Content = myInvoice.ID;
-            InvoiceDateBox.Text = myInvoice.InvoiceDate.ToString();
-            CostNum.Content = cost;
-            foreach(clsItem item in items)
+
+            catch (Exception ex)
             {
-                ItemsList.Items.Add(item);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
             }
-            taxNum.Content =  decimal.Multiply(cost, .1m); ; //to be updated once items are fixed.
-            TotalCostNum.Content = myInvoice.InvoiceTotal.ToString();
-            
+
         }
 
         /// <summary>
@@ -255,12 +299,40 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            InvoiceDateBox.IsReadOnly = false;
-            ItemDropDown.IsEnabled = true;
-            SelectButton.IsEnabled = true;
-            SaveButton.IsEnabled = true;
-            DeleteButton.IsEnabled = true;
-            edit = true;
+            try 
+            {
+                InvoiceDateBox.IsReadOnly = false;
+                ItemDropDown.IsEnabled = true;
+                SelectButton.IsEnabled = true;
+                SaveButton.IsEnabled = true;
+                DeleteButton.IsEnabled = true;
+                edit = true;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+            }
+
+        }
+
+
+        /// <summary>
+        /// catch all errors
+        /// </summary>
+        /// <param name="sClass"></param>
+        /// <param name="sMethod"></param>
+        /// <param name="sMessage"></param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                MessageBox.Show(sClass + "." + sMethod + " -> " + sMessage);
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
         }
     }
 }
