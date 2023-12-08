@@ -42,7 +42,7 @@ namespace GroupProject_WpfApp.Main
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
            
             searchWindow = new wndSearch(this); 
-            itemWindow = new wndItems();
+            itemWindow = new wndItems(this);
             mainInventory = new clsMainSQL();
             
             //put info into invoice and inventory list/drop down
@@ -59,9 +59,9 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void ItemsButton_Click(object sender, RoutedEventArgs e)
         {
-            wndItems item = new wndItems();
-            item.Owner = this;
-            item.ShowDialog();
+            //wndItems item = new wndItems();
+            itemWindow.Owner = this;
+            itemWindow.ShowDialog();
            
         }
 
