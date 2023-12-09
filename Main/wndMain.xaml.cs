@@ -208,15 +208,17 @@ namespace GroupProject_WpfApp.Main
             //if new: newInvoice()
             if (edit == false)
             {
-                newInvoice.InvoiceDate = DateTime.Now;
-                mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
+                    if(InvoiceDateBox.Text =="") newInvoice.InvoiceDate = DateTime.Now;
+                    else newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
+                    mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
                 newI = false;
             }
             //if edit: editInvoice()
             else
             {
-                newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
-                mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
+                    if (InvoiceDateBox.Text == "") newInvoice.InvoiceDate = DateTime.Now;
+                    else newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
+                    mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
             }
             //hide all invoice buttons
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
@@ -226,6 +228,7 @@ namespace GroupProject_WpfApp.Main
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
+            ItemDropDown.SelectedItem = null;
             }
             catch (Exception ex)
             {
