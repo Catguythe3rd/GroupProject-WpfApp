@@ -26,10 +26,9 @@ namespace GroupProject_WpfApp.Items
     {
         #region TestRegion_Variables
 
-        wndMain parentWindow;           // Allow manipulating variables of the arleady existing main function.
+        wndMain parentWindow;           // Link to the main window.
         clsItemsLogic clsItemsLogic;    // Link to the logic class.
-        clsItem? selectedItem;           // The cureently selected item in the list.
-        List<clsItem> itemsList;        // list of jewelery items
+        List<clsItem> itemsList;        // list of jewelery items.
 
         bool isValid_Code = false;
         bool isValid_Description = false;
@@ -57,8 +56,6 @@ namespace GroupProject_WpfApp.Items
                 add_Button.IsEnabled = false;
                 save_Button.IsEnabled = false;
                 delete_Button.IsEnabled = false;
-                upArrow_Button.IsEnabled = false;
-                downArrow_Button.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -77,7 +74,7 @@ namespace GroupProject_WpfApp.Items
             try
             {
                 // If there's no selected item, but there are items in the datagrid, select the top most one.
-                if (selectedItem == null && itemsTable_DataGrid != null)
+                if (itemsTable_DataGrid.SelectedItem == null && itemsTable_DataGrid != null)
                 {
                     itemsTable_DataGrid.SelectedIndex = 0;
                 }
@@ -107,7 +104,7 @@ namespace GroupProject_WpfApp.Items
             try
             {
                 // If there's no selected item, but there are items in the datagrid, select the bottom most one.
-                if (selectedItem == null && itemsTable_DataGrid != null)
+                if (itemsTable_DataGrid.SelectedItem == null && itemsTable_DataGrid != null)
                 {
                     itemsTable_DataGrid.SelectedIndex = itemsList.Count - 1;
                 }
@@ -132,6 +129,22 @@ namespace GroupProject_WpfApp.Items
             try
             {
                 clsItemsLogic.insertItem((string)Edit_Code_TextBox.Text, (string)Edit_Description_TextBox.Text, Decimal.Parse(Edit_Cost_TextBox.Text));
+
+                itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
+                itemsTable_DataGrid.ItemsSource = itemsList;     // Reloads datagrid with items from list.
+
+                // The item has been added to the list and is no longer a new code.
+                userHasEnteredNewItemCode = false;
+
+                // New items are put at the bottomb of the list so, set the dataGrid's selected item to the bottom item.
+                itemsTable_DataGrid.SelectedIndex = itemsList.Count - 1;
+                itemsTable_DataGrid.SelectedItem = itemsTable_DataGrid.Items[itemsTable_DataGrid.SelectedIndex]; 
+
+                // Updates the edit item buttons as this item cannot be added again.
+                updateEditItemsButtons();
+
+                //itemsTable_DataGrid.SelectedItem = selectedItem; 
+                EditError_Label.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -144,7 +157,20 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                clsItemsLogic.updateItem(selectedItem.ItemDesc, selectedItem.Cost, selectedItem.ItemCode);
+                clsItemsLogic.updateItem((string)Edit_Description_TextBox.Text, Decimal.Parse(Edit_Cost_TextBox.Text), (string)Edit_Code_TextBox.Text);
+                itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
+
+                // Saves the selected index and item because these values are set to default when
+                // the dataGrid is reloaded.
+                int tempIndex = itemsTable_DataGrid.SelectedIndex;
+                clsItem tempItem = itemsTable_DataGrid.SelectedItem as clsItem;
+
+                itemsTable_DataGrid.ItemsSource = itemsList;    // Reloads datagrid with updated items from list.
+
+                // Re-adds saved index and item values to dataGrid.
+                itemsTable_DataGrid.SelectedIndex = tempIndex;
+                itemsTable_DataGrid.SelectedItem = tempItem;        
+
                 EditError_Label.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
@@ -159,19 +185,26 @@ namespace GroupProject_WpfApp.Items
             try
             {
                 // must check if selected item is in an existing invoice, if so don't allow delete, update error label.
-                clsItemsLogic.deleteItem(selectedItem.ItemCode); // Deletes item from database.
+
+                clsItem tempItem = itemsTable_DataGrid.SelectedItem as clsItem;
+                clsItemsLogic.deleteItem(tempItem.ItemCode);    // Deletes item from database.
+
                 itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
                 itemsTable_DataGrid.ItemsSource = itemsList;     // Reloads datagrid with items from list.
-                selectedItem = null;                             // Sets slected item to default.
 
                 // Sets the values in the Edit Items group box to initial null values.
+                // Changing the text also calls functions to check whether they are valid or not.
                 Edit_Code_TextBox.Text = null;
                 Edit_Description_TextBox.Text = null;
                 Edit_Cost_TextBox.Text = null; // cost is in decimal, so converts to string.
 
-                // Disables save and delete buttons
-                save_Button.IsEnabled = false;
-                delete_Button.IsEnabled = false;
+                // An item is no longer selected, so this resets the dataGrids selected values.
+                itemsTable_DataGrid.SelectedItem = null;         
+                itemsTable_DataGrid.SelectedIndex = -1;
+
+                // Updates edit item buttons.
+                // No buttons can be clicked since as there is no item selected and nothing in the textBoxes.
+                updateEditItemsButtons();   
 
                 // Collapses error label
                 EditError_Label.Visibility = Visibility.Collapsed;
@@ -192,18 +225,37 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                // Set the select item variable for use in other functions.
-                selectedItem = itemsTable_DataGrid.Items[itemsTable_DataGrid.SelectedIndex] as clsItem;
-
-                // Sets the values in the Edit Items group box to match the selected item.
-                Edit_Code_TextBox.Text = selectedItem.ItemCode;
-                Edit_Description_TextBox.Text = selectedItem.ItemDesc;
-                Edit_Cost_TextBox.Text = selectedItem.Cost.ToString(); // cost is in decimal, so converts to string.
+                // If there is no selected item, then there are no values to update the groupbox with.
+                if (itemsTable_DataGrid.SelectedIndex != -1)
+                {
+                    editItems_GroupBox_Update();
+                }
             }
             catch (Exception ex)
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the values in the Edit Items group box to match the selected item.
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        void editItems_GroupBox_Update()
+        {
+            try
+            {
+                clsItem tempItem = itemsTable_DataGrid.SelectedItem as clsItem;
+
+                Edit_Code_TextBox.Text = tempItem.ItemCode;
+                Edit_Description_TextBox.Text = tempItem.ItemDesc;
+                Edit_Cost_TextBox.Text = tempItem.Cost.ToString(); // cost is in decimal, so converts to string.
+                EditError_Label.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
             }
         }
 
@@ -225,16 +277,16 @@ namespace GroupProject_WpfApp.Items
                 else
                 {
                     isValid_Code = true;
-                    userHasEnteredNewItemCode = false;
+                    userHasEnteredNewItemCode = true;
 
                     // Iterates through list and checks if the users itemCode matches an already existing code.
                     for (int i = 0; i < itemsList.Count; i++)
                     {
                         if (Edit_Code_TextBox.Text == itemsList[i].ItemCode)
                         {
-                            userHasEnteredNewItemCode = true;
-                            selectedItem = itemsList[i];
-                            itemsTable_DataGrid.SelectedItem = selectedItem;
+                            userHasEnteredNewItemCode = false;
+                            itemsTable_DataGrid.SelectedItem = itemsList[i];
+                            editItems_GroupBox_Update();
                             break;
                         }
                     }
@@ -339,8 +391,22 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
+                TextBox tempTextBox = sender as TextBox;
+
+                // Limits the length of text put into the database feild based on which feild/textbox it came from.
+                int maxTextLength = 0;
+
+                if (tempTextBox.Name == "Edit_Code_TextBox")
+                {
+                    maxTextLength = 4;
+                }
+                else
+                {
+                    maxTextLength = 25;
+                }
+
                 //Only allow letters to be entered
-                if (!(e.Key >= Key.A && e.Key <= Key.Z))
+                if (!(e.Key >= Key.A && e.Key <= Key.Z && tempTextBox.Text.Length < maxTextLength))
                 {
                     //Allow the user to use the backspace, delete, tab and enter
                     if (!(e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Tab || e.Key == Key.Enter
@@ -362,8 +428,10 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
+                TextBox tempTextBox = sender as TextBox;
+
                 //Only allow letters to be entered
-                if (!(e.Key >= Key.D0 && e.Key <= Key.D9))
+                if (!(e.Key >= Key.D0 && e.Key <= Key.D9 && tempTextBox.Text.Length < 4))
                 {
                     //Allow the user to use the backspace, delete, tab and enter
                     if (!(e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Enter))
@@ -385,7 +453,8 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                parentWindow.itemID = selectedItem;
+                clsItem tempItem = itemsTable_DataGrid.SelectedItem as clsItem;
+                parentWindow.itemID = tempItem;
             }
             catch (System.Exception ex)
             {

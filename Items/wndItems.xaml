@@ -53,7 +53,7 @@
             <StackPanel Orientation="Vertical">
 
                 <!-- Edit group Box -->
-                <GroupBox Header="Edit Items" FontSize="16" Margin="10,10,10,10" Foreground="White" BorderBrush="Gold" BorderThickness="2">
+                <GroupBox x:Name="editItems_GroupBox" Header="Edit Items" FontSize="16" Margin="10,10,10,10" Foreground="White" BorderBrush="Gold" BorderThickness="2">
                     <StackPanel Orientation="Vertical" Margin="10,10,10,10">
                         <StackPanel Orientation="Horizontal">
 
