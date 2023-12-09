@@ -27,7 +27,7 @@
         <!-- 1st Column - Buttons-->
         <Grid Grid.Column="0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <Button x:Name="upArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="upArrow_Button_Click">
+                <Button x:Name="upArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,80,0,10" Click="upArrow_Button_Click">
                     <Path Stroke="Black" Data="M 0 8 L 8 0 L 16 8 "/>
                     <!--(0,0) is in the top left. Pos x is right, pos y is down. Its called "Path Markup Syntax"-->
                 </Button>
@@ -35,6 +35,9 @@
                 <Button x:Name="downArrow_Button" Height="30" Style = "{StaticResource Column1ButtonStyle}" Margin="0,10,0,10" Click="downArrow_Button_Click">
                     <Path Stroke="Black" Data="M 0 0 L 8 8 L 16 0 "/>
                 </Button>
+
+                <Button x:Name="prank_Button" Content="Rotate" Style = "{StaticResource Column1ButtonStyle}" IsCancel="True" Margin="0,50,0,10"/>
+                <Button x:Name="close_Button" Content="Close" Style = "{StaticResource Column1ButtonStyle}" IsCancel="True" Margin="0,10,0,0"/>
             </StackPanel>
         </Grid>
 
@@ -64,19 +67,19 @@
                             <!-- text Boxes -->
                             <StackPanel Orientation="Vertical" Width="150">
                                 <TextBox x:Name="Edit_Code_TextBox" Margin="0,5,0,10" TextChanged="Edit_Code_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
+                                <TextBox x:Name="Edit_Description_TextBox" Margin="0,0,0,10" PreviewKeyDown="txtLetterInput_PreviewKeyDown" TextChanged="Edit_Description_TextBox_TextChanged"/>
+                                <TextBox x:Name="Edit_Cost_TextBox" Margin="0,0,0,20" PreviewKeyDown="txtNumberInput_PreviewKeyDown" TextChanged="Edit_Cost_TextBox_TextChanged"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- Save button-->
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="add_Button" Content="Add" Style = "{StaticResource Column1ButtonStyle}" Click="new_Button_Click" Margin="0,0,10,0"/>
+                                <Button x:Name="add_Button" Content="Add" Style = "{StaticResource Column1ButtonStyle}" Click="add_Button_Click" Margin="0,0,10,0"/>
                                 <Button x:Name="save_Button" Content="Save" Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click" Margin="0,0,10,0" HorizontalAlignment="Center"/>
                                 <Button x:Name="delete_Button" Content="Delete" Style = "{StaticResource Column1ButtonStyle}" Click="delete_Button_Click" Margin="0,0,0,0"/>
                             </StackPanel>
-                            <Label x:Name="EditError_Label" Content="Item unsaved" HorizontalAlignment="Center" Foreground="White" Background="Red" Visibility="Hidden"/>
+                            <TextBlock x:Name="EditError_Label" Text=" Warning: your mother. test hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" HorizontalAlignment="Center" Foreground="White" Background="#BFFF0000" TextWrapping="Wrap" Margin="0,10,0,0" Visibility="Visible" Width="320"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
