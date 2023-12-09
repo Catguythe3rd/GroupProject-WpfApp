@@ -19,19 +19,35 @@ namespace GroupProject_WpfApp.Search
     /// </summary>
     public partial class wndSearch : Window
     {
-        Window parentWindow;
+        //instantiating some important data for the window
+        #region
+        //parent window
+        Main.wndMain parent;
+        //general list if invoices
         List<invoice> invoices = new List<invoice>();
+        //list of searched invoices
         List<invoice> searchedInvoices = new List<invoice>();
-        internal invoice selectedInvoice;
+        //selecyed invoice
+        internal invoice selectedInvoice = null;
+        #endregion
+
+        /// <summary>
+        /// Constructor. Takes parent window as an arguement so that it can access the parent window's internal-variables
+        /// </summary>
+        /// <param name="parent"></param>
         public wndSearch(Main.wndMain parent)
         {
+            //generate UI
             InitializeComponent();
+            //instantiate the DB
             clsSearchSQL database = new clsSearchSQL();
-            parentWindow = parent;
+            //set the parent
+            this.parent = parent;
+            //set the invoice list equal to the retrieved DB list
             invoices = database.getInvoices();
+            //call list that sets invoices to the listbox
             setInvoices(invoices,true);
         }
-
 
         /// <summary>
         /// Adds invoice data to the totalCharges ComboBox, dates to the InvoiceDate ComboBox, and the invoice itself to the scrollViewer.
@@ -67,15 +83,23 @@ namespace GroupProject_WpfApp.Search
             }
         }
 
+        /// <summary>
+        /// calls the edit invoice sub-window. Passes this window as a parent as an arguement so that it has direct access to the selcted invoice, 
+        /// rather than passing the invoice as an arguement, instantiating a copy, and then returning it and setting the original equal to that
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            //instantiate window, passing this one as an arguement
             editInvoice editWindow = new editInvoice(this);
+            //set this window as the owner of it
             editWindow.Owner = this;
+            //display new window under showDialog so that this one cannot be alter'd anymore
             editWindow.ShowDialog();
-
-
+            //now that we have made potentially substantial changes to an invoice, we will regenerate the invoice list in it's entirety
+            setInvoices(invoices, true);
         }
-
 
         /// <summary>
         /// Taking in the arguements offered from the search parameters, the program will search for any invoices that have the same attributes.
@@ -127,8 +151,6 @@ namespace GroupProject_WpfApp.Search
 
         }
 
-
-
         /// <summary>
         /// This is a click function that is assigned to the ListBoxItems on their click events as they are generated 
         /// It will compare the same format of the listboxitem string using each invoice to the actual sender of the arguement (AKA, the listboxitem)
@@ -150,6 +172,45 @@ namespace GroupProject_WpfApp.Search
                     selectedInvoice = invoice;
                 }
             }
+        }
+
+
+        /// <summary>
+        /// When the button is clicked, restore the original search state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            //nullify the TotalCharges selection
+            TotalChargesComboBox.SelectedItem = null;
+            //reset the numberInput textbox
+            numberInput.Text = "";
+            //nullify the dateDropDown selection
+            dateDropDown.SelectedItem = null;
+            //clear the search results List
+            searchedInvoices.Clear();
+            //restore the displayed invoices
+            setInvoices(invoices, true);
+            //clear the selected invoice
+            selectedInvoice = null;
+        }
+
+        /// <summary>
+        /// When this window is closed, I should send the Invoice Number of the selected invoice back to the main window
+        /// (assuming that there is a selected invoice)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void searchWindow_Close(object sender, RoutedEventArgs e)
+        {
+            //insure that an invoice was actually selected
+            if (selectedInvoice != null)
+            {
+                //if so, reach back to the parent variable value and set it equal to the selectedInvoice invoiceNumber
+                parent.invoiceID = selectedInvoice.getNumber();
+            }
+
         }
     }
 }
