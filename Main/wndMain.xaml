@@ -71,7 +71,7 @@
                 <Label x:Name="TotalCostLabel" Content="Total Cost: " HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="8" VerticalAlignment="Center"/>
 
                 <Label x:Name="invoiceNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
-                <TextBox x:Name="InvoiceDateBox" IsReadOnly="true" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="174" Grid.RowSpan="2" Grid.ColumnSpan="2" Height="18" Margin="0,35,0,0"/>
+                <DatePicker x:Name="InvoiceDateBox" IsEnabled="false" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2"  VerticalAlignment="Center" Width="174" Grid.ColumnSpan="2" Height="25" />
                 <ComboBox x:Name="ItemDropDown" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="90"/>
                 <Label x:Name="CostNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label x:Name="TaxNumlbl" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
@@ -81,6 +81,7 @@
                 <Label Grid.Column="1" x:Name="CostNum" HorizontalAlignment="Left"  Grid.Row="6" VerticalAlignment="Center"  Width="79" Content="0"/>
                 <Label Grid.Column="1" x:Name="taxNum" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Center"  Width="79"  Content="0" />
                 <Label Grid.Column="1" x:Name="TotalCostNum" HorizontalAlignment="Left"  Grid.Row="8" VerticalAlignment="Center"  Width="79" Content="0" />
+
 
             </Grid>
         </Border>

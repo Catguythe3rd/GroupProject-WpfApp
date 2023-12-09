@@ -116,7 +116,7 @@ namespace GroupProject_WpfApp.Main
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
             try{ 
-            InvoiceDateBox.IsReadOnly = false;
+            InvoiceDateBox.IsEnabled = true;
             ItemDropDown.IsEnabled = true;
             SelectButton.IsEnabled = true;
             SaveButton.IsEnabled = true;
@@ -224,7 +224,7 @@ namespace GroupProject_WpfApp.Main
             //hide all invoice buttons
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
 
-            InvoiceDateBox.IsReadOnly = true;
+            InvoiceDateBox.IsEnabled = false;
             ItemDropDown.IsEnabled = false;
             SelectButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
@@ -262,7 +262,7 @@ namespace GroupProject_WpfApp.Main
             try
             {
                 ItemsList.Items.Clear();
-                InvoiceDateBox.IsReadOnly = true;
+                InvoiceDateBox.IsEnabled = false;
                 ItemDropDown.IsEnabled = false;
                 SelectButton.IsEnabled = false;
                 SaveButton.IsEnabled = false;
@@ -303,14 +303,18 @@ namespace GroupProject_WpfApp.Main
         /// <param name="e"></param>
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
-                InvoiceDateBox.IsReadOnly = false;
-                ItemDropDown.IsEnabled = true;
-                SelectButton.IsEnabled = true;
-                SaveButton.IsEnabled = true;
-                DeleteButton.IsEnabled = true;
-                edit = true;
+                if (invoice_List.SelectedValue != null)
+                {
+                    InvoiceDateBox.IsEnabled = true;
+                    ItemDropDown.IsEnabled = true;
+                    SelectButton.IsEnabled = true;
+                    SaveButton.IsEnabled = true;
+                    DeleteButton.IsEnabled = true;
+                    edit = true;
+                }
+                else return;
             }
 
             catch (Exception ex)
