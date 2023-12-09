@@ -193,12 +193,14 @@ namespace GroupProject_WpfApp.Main
             clsMainLogic newInvoice = new clsMainLogic();
             List<clsItem> items = new List<clsItem>();
 
-            //save invoice id
-            newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
+                //get new date
+                DateTime invoiceDate = DateTime.Now;
+                //save invoice id
+                newInvoice.ID = Int32.Parse(invoiceNum.Content.ToString());
             //save itemsList to invoice obj
             //save Cost to invoice obj
             newInvoice.InvoiceTotal = decimal.Parse(TotalCostNum.Content.ToString());
-
+               
             //add items to list
             foreach (clsItem s in ItemsList.Items)
             {
@@ -208,17 +210,16 @@ namespace GroupProject_WpfApp.Main
             //if new: newInvoice()
             if (edit == false)
             {
-                    if(InvoiceDateBox.Text =="") newInvoice.InvoiceDate = DateTime.Now;
-                    else newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
+                    DateTime.TryParse(InvoiceDateBox.Text, out invoiceDate);
                     mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
                 newI = false;
             }
             //if edit: editInvoice()
             else
             {
-                    if (InvoiceDateBox.Text == "") newInvoice.InvoiceDate = DateTime.Now;
-                    else newInvoice.InvoiceDate = DateTime.Parse(InvoiceDateBox.Text);
-                    mainInventory.editInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
+                    DateTime.TryParse(InvoiceDateBox.Text, out invoiceDate);
+                    mainInventory.editInvoice(invoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);
+                    edit = false;
             }
             //hide all invoice buttons
             invoice_List.ItemsSource = mainInventory.getAllInvoices();
