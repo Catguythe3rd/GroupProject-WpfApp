@@ -16,7 +16,7 @@ namespace GroupProject_WpfApp.Search
 {
     internal class clsSearchLogic{
         wndSearch window;
-        public clsSearchLogic(wndSearch winow)
+        public clsSearchLogic(wndSearch window)
         {
             //initiate the parent window
             this.window = window;
@@ -77,7 +77,7 @@ namespace GroupProject_WpfApp.Search
         /// <summary>
         /// Called by the window class on a listbox item click to find the selected invoice
         /// </summary>
-        private void selectInvoice()
+        /*private void selectInvoice()
         {
             //instantiate the sender as a listboxitem
             ListBoxItem selection = sender as ListBoxItem;
@@ -91,6 +91,6 @@ namespace GroupProject_WpfApp.Search
                     window.selectedInvoice = invoice;
                 }
             }
-        } 
+        } */
     }
 }
