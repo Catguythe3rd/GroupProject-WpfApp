@@ -211,7 +211,7 @@ namespace GroupProject_WpfApp.Main
             if (edit == false)
             {
                     DateTime.TryParse(InvoiceDateBox.Text, out invoiceDate);
-                    mainInventory.newInvoice(newInvoice.InvoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
+                    mainInventory.newInvoice(invoiceDate, newInvoice.InvoiceTotal, newInvoice.ID, items);//doesn't add all info yet. 
                 newI = false;
             }
             //if edit: editInvoice()
