@@ -77,7 +77,7 @@ namespace GroupProject_WpfApp.Search
         /// <summary>
         /// Called by the window class on a listbox item click to find the selected invoice
         /// </summary>
-        /*private void selectInvoice()
+        internal void selectInvoice(object sender)
         {
             //instantiate the sender as a listboxitem
             ListBoxItem selection = sender as ListBoxItem;
@@ -91,6 +91,6 @@ namespace GroupProject_WpfApp.Search
                     window.selectedInvoice = invoice;
                 }
             }
-        } */
+        } 
     }
 }

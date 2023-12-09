@@ -129,7 +129,12 @@ namespace GroupProject_WpfApp.Search
         /// <param name="e"></param>
         private void selectCall(object sender, RoutedEventArgs e)
         {
-            logicClass.searchInvoice();
+            logicClass.selectInvoice(sender);
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
