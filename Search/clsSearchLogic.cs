@@ -75,11 +75,14 @@ namespace GroupProject_WpfApp.Search
                 {
                     window.searchedInvoices.Add(invoice);
                 }
+
                 foreach (String item in window.ItemList)
                 {
                     foreach(String lineItem in window.lineItems)
                     {
-                        char itemCode = item[0];
+                        int i = item.IndexOf(' ');
+                        string itemCode = item.Substring(0, i);
+
                         if (itemCode + " " + invoice.getNumber() == lineItem)
                         {
                             window.searchedInvoices.Add(invoice);
