@@ -36,11 +36,13 @@ namespace GroupProject_WpfApp.Search
         /// </summary>
         public void searchInvoice()
         {
-            //We need to clear the searchedInvoices list so that we are not retainign invoices from old searches
+            //We need to clear the searchedInvoices list so that we are not retaining invoices from old searches
             window.searchedInvoices.Clear();
             //These are the search arguements
             ComboBoxItem date = new ComboBoxItem();
+            date.Content = "00/00/00";
             ComboBoxItem charge = new ComboBoxItem();
+            charge.Content = "00.00";
             int invoiceNumber = 0;
 
             //these three statements are setting the previous objects equal to the arguements, if applicable
