@@ -167,7 +167,7 @@ namespace GroupProject_WpfApp.Search
         {
             foreach (String item in ItemList)
             {
-                if (ItemListBox.SelectedItem == item)
+                if (ItemListBox.SelectedItem.ToString() == item)
                 {
                     selectedItems.Add(item);
                 }
