@@ -36,76 +36,42 @@ namespace GroupProject_WpfApp.Search
         /// </summary>
         public void searchInvoice()
         {
-            //We need to clear the searchedInvoices list so that we are not retaining invoices from old searches
+            //We need to clear the searchedInvoices list so that we are not retainign invoices from old searches
             window.searchedInvoices.Clear();
             //These are the search arguements
             ComboBoxItem date = new ComboBoxItem();
-            date.Content = "00/00/00";
             ComboBoxItem charge = new ComboBoxItem();
-            charge.Content = "00.00";
             int invoiceNumber = 0;
-
-            List<String> parameters = new List<String>();
-            List<String> comparators = new List<String>();
-            int numbSearch = 0;
-            int matches = 0;
 
             //these three statements are setting the previous objects equal to the arguements, if applicable
             if (window.dateDropDown.SelectedItem != null)
             {
                 date = window.dateDropDown.SelectedItem as ComboBoxItem;
-                parameters.Add(date.Content.ToString());
-                numbSearch++;
-            }
-            else
-            {
-                parameters.Add("No Input");
             }
             if (window.TotalChargesComboBox.SelectedItem != null)
             {
                 charge = window.TotalChargesComboBox.SelectedItem as ComboBoxItem;
-                parameters.Add(charge.Content.ToString());
-                numbSearch++;
             }
-            else
-            {
-                parameters.Add("No Input");
-            }
-            if (int.TryParse(window.numberInput.Text, out invoiceNumber))
-            { 
-                parameters.Add(invoiceNumber.ToString());
-                numbSearch++;
-            }
-            else
-            {
-                parameters.Add("No Input");
-            }
-            
+            int.TryParse(window.numberInput.Text, out invoiceNumber);
+
+
             foreach (invoice invoice in window.invoices)
             {
-                matches = 0;
-                comparators.Clear();
-                comparators.Add(invoice.getNumber().ToString());
-                comparators.Add(invoice.getTotal().ToString());
-                comparators.Add(invoice.getDate().ToString());
-                if(comparators[0] == parameters[0])
-                {
-                    matches++;
-                }
-                if (comparators[1] == parameters[1])
-                {
-                    matches++;
-                }
-                if (comparators[2] == parameters[2])
-                {
-                    matches++;
-                }
-
-                if (matches == numbSearch)
+                //does the invoice have the same date?
+                if (invoice.getDate().ToString() == date.Content.ToString())
                 {
                     window.searchedInvoices.Add(invoice);
                 }
-
+                //does the invoice have the same invoice number?
+                else if (invoice.getNumber() == invoiceNumber)
+                {
+                    window.searchedInvoices.Add(invoice);
+                }
+                //does the invoice have the same totalCharge?
+                else if (invoice.getTotal().ToString() == charge.Content.ToString())
+                {
+                    window.searchedInvoices.Add(invoice);
+                }
                 foreach (String item in window.ItemList)
                 {
                     foreach(String lineItem in window.lineItems)
@@ -123,7 +89,9 @@ namespace GroupProject_WpfApp.Search
 
 
 
-        
+        /// <summary>
+        /// Called by the window class on a listbox item click to find the selected invoice
+        /// </summary>
         internal void selectInvoice(object sender)
         {
             //instantiate the sender as a listboxitem
