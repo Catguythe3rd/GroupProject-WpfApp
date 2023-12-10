@@ -34,7 +34,7 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
-        public DataSet selectItemsWithItemcode(string itemCode, ref int iRef)
+        public DataSet selectInvoicesWithItemcode(string itemCode, ref int iRef)
         {
             try
             {

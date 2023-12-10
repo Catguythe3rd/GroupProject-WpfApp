@@ -36,8 +36,7 @@
                     <Path Stroke="Black" Data="M 0 0 L 8 8 L 16 0 "/>
                 </Button>
 
-                <Button x:Name="prank_Button" Content="Rotate" Style = "{StaticResource Column1ButtonStyle}" IsCancel="True" Margin="0,50,0,10"/>
-                <Button x:Name="close_Button" Content="Close" Style = "{StaticResource Column1ButtonStyle}" IsCancel="True" Margin="0,10,0,0"/>
+                <Button x:Name="close_Button" Content="Close" Style = "{StaticResource Column1ButtonStyle}" IsCancel="True" Margin="0,50,0,0"/>
             </StackPanel>
         </Grid>
 
@@ -74,44 +73,18 @@
 
                         <!-- Save button-->
                         <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
                                 <Button x:Name="add_Button" Content="Add" Style = "{StaticResource Column1ButtonStyle}" Click="add_Button_Click" Margin="0,0,10,0"/>
                                 <Button x:Name="save_Button" Content="Save" Style = "{StaticResource Column1ButtonStyle}" Click="Save_Button_Click" Margin="0,0,10,0" HorizontalAlignment="Center"/>
                                 <Button x:Name="delete_Button" Content="Delete" Style = "{StaticResource Column1ButtonStyle}" Click="delete_Button_Click" Margin="0,0,0,0"/>
                             </StackPanel>
-                            <TextBlock x:Name="EditError_Label" Text=" Warning: your mother. test hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" HorizontalAlignment="Center" Foreground="White" Background="#BFFF0000" TextWrapping="Wrap" Margin="0,10,0,0" Visibility="Visible" Width="320"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
-                <!-- Search Box --><!--
-                <GroupBox Header="Search Items" FontSize="16" Margin="10,10,10,10" Foreground="White" BorderBrush="Gold" BorderThickness="2">
-                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-                        <StackPanel Orientation="Horizontal">
-
-                            --><!-- Label Boxes --><!--
-                            <StackPanel Orientation="Vertical">
-                                <Label Content="Item Code:" HorizontalAlignment="Right" Foreground="White"/>
-                                <Label Content="Item Description:" HorizontalAlignment="Right" Foreground="White"/>
-                                <Label Content="Cost:" HorizontalAlignment="Right" Foreground="White"/>
-                            </StackPanel>
-
-                            --><!-- text Boxes --><!--
-                            <StackPanel Orientation="Vertical" Width="150">
-                                <TextBox x:Name="Search_Code_TextBox" Margin="0,5,0,10" TextChanged="Search_Code_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Search_Description_TextBox" Margin="0,0,0,10" TextChanged="Search_Description_TextBox_TextChanged" PreviewKeyDown="txtLetterInput_PreviewKeyDown"/>
-                                <TextBox x:Name="Search_Cost_TextBox" Margin="0,0,0,20" TextChanged="Search_Cost_TextBox_TextChanged" PreviewKeyDown="txtNumberInput_PreviewKeyDown"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                        --><!-- Save button--><!--
-
-                        <StackPanel Orientation="Vertical">
-                            <Button x:Name="search_Button" Content="Search" Style = "{StaticResource Column1ButtonStyle}" Click="Search_Button_Click" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                            <Label x:Name="Unused_SearchError_Label" Content="Unused_SearchError_Label" HorizontalAlignment="Center" Foreground="White" Background="Red" IsEnabled="False" Visibility="Hidden"/>
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>-->
+                <ScrollViewer x:Name="EditError_ScrollViewer" Margin="0,15,0,0" Width="320" Height="250" >
+                    <TextBlock x:Name="EditError_TextBlock" Text=" Warning: your mother" HorizontalAlignment="Center" Foreground="White" Background="#BFFF0000" Width="303" TextWrapping="Wrap" Visibility="Visible"/>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
     </Grid>

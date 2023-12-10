@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace GroupProject_WpfApp.Items
 {
@@ -51,7 +52,7 @@ namespace GroupProject_WpfApp.Items
                 clsItemsLogic = new clsItemsLogic();                // Initializes item logic script.
                 itemsList = clsItemsLogic.getAllItems();            // Stores a list of the items from the database.
                 itemsTable_DataGrid.ItemsSource = itemsList;        // Sets the datagrid to the list of items.
-                EditError_Label.Visibility = Visibility.Collapsed;  // Closes error box before starting the program.
+                EditError_ScrollViewer.Visibility = Visibility.Collapsed;  // Closes error box before starting the program.
 
                 add_Button.IsEnabled = false;
                 save_Button.IsEnabled = false;
@@ -124,6 +125,11 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -144,7 +150,7 @@ namespace GroupProject_WpfApp.Items
                 updateEditItemsButtons();
 
                 //itemsTable_DataGrid.SelectedItem = selectedItem; 
-                EditError_Label.Visibility = Visibility.Collapsed;
+                EditError_ScrollViewer.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -171,7 +177,7 @@ namespace GroupProject_WpfApp.Items
                 itemsTable_DataGrid.SelectedIndex = tempIndex;
                 itemsTable_DataGrid.SelectedItem = tempItem;        
 
-                EditError_Label.Visibility = Visibility.Collapsed;
+                EditError_ScrollViewer.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -184,30 +190,47 @@ namespace GroupProject_WpfApp.Items
         {
             try
             {
-                // must check if selected item is in an existing invoice, if so don't allow delete, update error label.
-
                 clsItem tempItem = itemsTable_DataGrid.SelectedItem as clsItem;
-                clsItemsLogic.deleteItem(tempItem.ItemCode);    // Deletes item from database.
 
-                itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
-                itemsTable_DataGrid.ItemsSource = itemsList;     // Reloads datagrid with items from list.
+                int iRef = 0;
+                List<int> listInvoiceNumbers = clsItemsLogic.getInvoiceNumbersWithItemcode(tempItem.ItemCode, ref iRef);
 
-                // Sets the values in the Edit Items group box to initial null values.
-                // Changing the text also calls functions to check whether they are valid or not.
-                Edit_Code_TextBox.Text = null;
-                Edit_Description_TextBox.Text = null;
-                Edit_Cost_TextBox.Text = null; // cost is in decimal, so converts to string.
+                // Check if selected item is in an existing invoice.
+                if (listInvoiceNumbers.Count != 0) // If the item exists in an invoice, update error textBox.
+                {
+                    EditError_TextBlock.Text = " Warning: Item " + tempItem.ItemCode + " cannot be deleted because it is in the following invoices;\n";
+                    for (int i = 0; i < iRef; i++)
+                    {
+                        EditError_TextBlock.Text += "\n" + listInvoiceNumbers[i];
+                    }
 
-                // An item is no longer selected, so this resets the dataGrids selected values.
-                itemsTable_DataGrid.SelectedItem = null;         
-                itemsTable_DataGrid.SelectedIndex = -1;
+                    // Show error label
+                    EditError_ScrollViewer.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    clsItemsLogic.deleteItem(tempItem.ItemCode);    // Deletes item from database.
 
-                // Updates edit item buttons.
-                // No buttons can be clicked since as there is no item selected and nothing in the textBoxes.
-                updateEditItemsButtons();   
+                    itemsList = clsItemsLogic.getAllItems();         // Reloads item list from data base.
+                    itemsTable_DataGrid.ItemsSource = itemsList;     // Reloads datagrid with items from list.
 
-                // Collapses error label
-                EditError_Label.Visibility = Visibility.Collapsed;
+                    // Sets the values in the Edit Items group box to initial null values.
+                    // Changing the text also calls functions to check whether they are valid or not.
+                    Edit_Code_TextBox.Text = null;
+                    Edit_Description_TextBox.Text = null;
+                    Edit_Cost_TextBox.Text = null; // cost is in decimal, so converts to string.
+
+                    // An item is no longer selected, so this resets the dataGrids selected values.
+                    itemsTable_DataGrid.SelectedItem = null;
+                    itemsTable_DataGrid.SelectedIndex = -1;
+
+                    // Updates edit item buttons.
+                    // No buttons can be clicked since as there is no item selected and nothing in the textBoxes.
+                    updateEditItemsButtons();
+
+                    // Collapses error label
+                    EditError_ScrollViewer.Visibility = Visibility.Collapsed;
+                }
             }
             catch (Exception ex)
             {
@@ -251,7 +274,7 @@ namespace GroupProject_WpfApp.Items
                 Edit_Code_TextBox.Text = tempItem.ItemCode;
                 Edit_Description_TextBox.Text = tempItem.ItemDesc;
                 Edit_Cost_TextBox.Text = tempItem.Cost.ToString(); // cost is in decimal, so converts to string.
-                EditError_Label.Visibility = Visibility.Collapsed;
+                EditError_ScrollViewer.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {

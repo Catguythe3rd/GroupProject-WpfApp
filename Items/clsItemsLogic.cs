@@ -43,24 +43,25 @@ namespace GroupProject_WpfApp.Items
             }
         }
 
-        public List<clsItem> getItemsWithItemcode(string itemCode)
+        public List<int> getInvoiceNumbersWithItemcode(string itemCode, ref int iRef)
         {
             try
             {
-                int iRef = 0;
-                DataSet itemsTableDataSet = clsItemsSQL.selectItemsWithItemcode(itemCode, ref iRef);
+                iRef = 0;
+                DataSet lineItemsDataSet = clsItemsSQL.selectInvoicesWithItemcode(itemCode, ref iRef);
 
-                List<clsItem> listItems = new List<clsItem>();
+                List<int> listInvoiceNumbers = new List<int>();
+
                 for (int i = 0; i < iRef; i++)
                 {
-                    clsItem tempItem = new clsItem((string)itemsTableDataSet.Tables[0].Rows[i][0],
-                                                    (string)itemsTableDataSet.Tables[0].Rows[i][1],
-                                                    (decimal)itemsTableDataSet.Tables[0].Rows[i][2]
-                                                    );
-                    listItems.Add(tempItem);
+                    clsLineItems tempLineItem = new clsLineItems((int)lineItemsDataSet.Tables[0].Rows[i][0]);
+
+                    int tempInvoiceNumber = tempLineItem.InvoiceNumber;
+
+                    listInvoiceNumbers.Add(tempInvoiceNumber);
                 }
 
-                return listItems;
+                return listInvoiceNumbers;
             }
             catch (Exception ex)
             {
