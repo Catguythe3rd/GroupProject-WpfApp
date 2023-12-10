@@ -36,6 +36,7 @@ namespace GroupProject_WpfApp.Search
         /// </summary>
         public void searchInvoice()
         {
+            window.InvoiceListBox.Items.Clear();
             //We need to clear the searchedInvoices list so that we are not retainign invoices from old searches
             window.searchedInvoices.Clear();
             //These are the search arguements
@@ -78,7 +79,7 @@ namespace GroupProject_WpfApp.Search
                 {
                     foreach(String lineItem in window.lineItems)
                     {
-                        char itemCode = item[1];
+                        char itemCode = item[0];
                         if (itemCode + " " + invoice.getNumber() == lineItem)
                         {
                             window.searchedInvoices.Add(invoice);
