@@ -88,15 +88,15 @@ namespace GroupProject_WpfApp.Search
                 comparators.Add(invoice.getNumber().ToString());
                 comparators.Add(invoice.getTotal().ToString());
                 comparators.Add(invoice.getDate().ToString());
-                if(comparators[1] == parameters[1])
+                if(comparators[0] == parameters[0])
+                {
+                    matches++;
+                }
+                if (comparators[1] == parameters[1])
                 {
                     matches++;
                 }
                 if (comparators[2] == parameters[2])
-                {
-                    matches++;
-                }
-                if (comparators[3] == parameters[3])
                 {
                     matches++;
                 }
