@@ -46,7 +46,7 @@ namespace GroupProject_WpfApp.Search
             ln = db.ExecuteSQLStatement("select * from LineItems", ref iRet);
             foreach (DataRow dr in ln.Tables[0].Rows)
             {
-                lineItems.Add(dr[0]+" "+dr[2]);
+                lineItems.Add(dr[2]+" "+dr[0]);
             }
             return lineItems;
         }
