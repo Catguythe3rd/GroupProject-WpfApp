@@ -107,10 +107,12 @@ namespace GroupProject_WpfApp.Search
             dateDropDown.SelectedItem = null;
             //clear the search results List
             searchedInvoices.Clear();
-            //restore the displayed invoices
-            setInvoices(invoices, true);
             //clear the selected invoice
             selectedInvoice = null;
+            //clear selected items
+            selectedItems.Clear();
+            //restore the displayed invoices
+            setInvoices(invoices, true);
         }
 
         /// <summary>
