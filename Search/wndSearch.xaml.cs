@@ -165,9 +165,10 @@ namespace GroupProject_WpfApp.Search
 
         private void itemSelected(object sender, RoutedEventArgs e)
         {
+            ListBoxItem selectedItem = sender as ListBoxItem;
             foreach (String item in ItemList)
             {
-                if (ItemListBox.SelectedItem.ToString() == item)
+                if (selectedItem.Content == item)
                 {
                     selectedItems.Add(item);
                 }
