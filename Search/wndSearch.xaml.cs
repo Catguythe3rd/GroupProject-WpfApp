@@ -37,7 +37,7 @@ namespace GroupProject_WpfApp.Search
         //items list
         internal List<String> ItemList;
         //list of selected items
-        internal List<String> selectedItems
+        internal List<String> selectedItems;
         #endregion
 
         /// <summary>
