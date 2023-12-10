@@ -97,7 +97,7 @@ namespace GroupProject_WpfApp.Main
                     int invoiceIndex = invoiceID - 5000;
                     invoice_List.SelectedIndex = invoiceIndex;
                 }
-                ItemDropDown.ItemsSource = mainInventory.getAllInvoices();
+                ItemDropDown.ItemsSource = mainInventory.getAllItems();
             }
             catch (Exception ex)
             {
@@ -297,7 +297,7 @@ namespace GroupProject_WpfApp.Main
         }
 
         /// <summary>
-        /// edit fuctionality start
+        /// edit function start
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
