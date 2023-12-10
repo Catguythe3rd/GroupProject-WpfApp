@@ -36,6 +36,8 @@ namespace GroupProject_WpfApp.Search
         internal List<String> lineItems;
         //items list
         internal List<String> ItemList;
+        //list of selected items
+        internal List<String> selectedItems
         #endregion
 
         /// <summary>
@@ -148,9 +150,21 @@ namespace GroupProject_WpfApp.Search
             foreach (String item in ItemList)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.MouseLeftButtonUp += selectCall;
+                newItem.MouseLeftButtonUp += itemSelected;
                 newItem.Content = item;
                 ItemListBox.Items.Add(newItem);
+            }
+        }
+
+
+        private void itemSelected(object sender, RoutedEventArgs e)
+        {
+            foreach (String item in ItemList)
+            {
+                if (ItemListBox.SelectedItem == item)
+                {
+                    selectedItems.Add(item);
+                }
             }
         }
     }

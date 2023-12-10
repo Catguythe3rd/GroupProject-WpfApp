@@ -91,9 +91,7 @@ namespace GroupProject_WpfApp.Search
 
 
 
-        /// <summary>
-        /// Called by the window class on a listbox item click to find the selected invoice
-        /// </summary>
+        
         internal void selectInvoice(object sender)
         {
             //instantiate the sender as a listboxitem
