@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GroupProject_WpfApp.Search
 {
@@ -70,8 +72,19 @@ namespace GroupProject_WpfApp.Search
                 {
                     window.searchedInvoices.Add(invoice);
                 }
-                window.setInvoices(window.searchedInvoices, false);
+                foreach (String item in window.ItemList)
+                {
+                    foreach(String lineItem in window.lineItems)
+                    {
+                        char itemCode = item[1];
+                        if (itemCode + " " + invoice.getNumber() == lineItem)
+                        {
+                            window.searchedInvoices.Add(invoice);
+                        }
+                    }
+                }
             }
+            window.setInvoices(window.searchedInvoices, false);
         }
 
 
