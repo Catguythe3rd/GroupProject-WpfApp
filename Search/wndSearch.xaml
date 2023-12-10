@@ -27,37 +27,9 @@
         <Label Content="Total Charges" HorizontalAlignment="Left" Margin="491,181,0,0" VerticalAlignment="Top"/>
         <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="620,254,72,71" Foreground="#FFAD2E2E">
             <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
-                <ListBoxItem>Item</ListBoxItem>
             </ListBox>
         </ScrollViewer>
         <Label Content="Items: " HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top"/>
         <Label Content="INVOICES: " HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top"/>
-        <!-- 
-        
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ListBoxItem>Item 1</ListBoxItem>
-            <ListBoxItem>Item 2</ListBoxItem>
-            <ListBoxItem>Item 3</ListBoxItem>
-            </ListBox>
-            </ScrollViewer>
-
-        -->
     </Grid>
 </Window>

@@ -23,6 +23,8 @@ namespace GroupProject_WpfApp.Search
             clsSearchSQL database = new clsSearchSQL();
             //set the invoice list equal to the retrieved DB list
             window.invoices = database.getInvoices();
+            window.lineItems = database.getLineItems();
+            window.ItemList = database.getItems();
         }
 
         /// <summary>
