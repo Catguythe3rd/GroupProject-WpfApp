@@ -76,7 +76,7 @@ namespace GroupProject_WpfApp.Search
                     window.searchedInvoices.Add(invoice);
                 }
 
-                foreach (String item in window.ItemList)
+                foreach (String item in window.selectedItems)
                 {
                     foreach(String lineItem in window.lineItems)
                     {
