@@ -12,6 +12,9 @@ namespace GroupProject_WpfApp.Search
 
 
         List<invoice> lstInvoices;
+        List<String> lineItems;
+        clsDataAccess db = new clsDataAccess();
+        List<String> items;
 
         /// <summary>
         /// list all items in database
@@ -19,7 +22,6 @@ namespace GroupProject_WpfApp.Search
         /// <returns></returns>
         public List<invoice> getInvoices()
         {
-            clsDataAccess db = new clsDataAccess();
             DataSet ds = new DataSet();
             int iRet = 0;
             lstInvoices = new List<invoice>();
@@ -35,6 +37,35 @@ namespace GroupProject_WpfApp.Search
 
             return lstInvoices;
         }
+
+        public List<String> getLineItems()
+        {
+            DataSet ln = new DataSet();
+            int iRet = 0;
+            lineItems = new List<String>();
+            ln = db.ExecuteSQLStatement("select * from LineItems", ref iRet);
+            foreach (DataRow dr in ln.Tables[0].Rows)
+            {
+                lineItems.Add(dr[0]+" "+dr[2]);
+            }
+            return lineItems;
+        }
+
+        public List<String> getItems()
+        {
+            DataSet it = new DataSet();
+            int iRet = 0;
+            items = new List<String>();
+            it = db.ExecuteSQLStatement("select ItemCode, ItemDesc from ItemDesc", ref iRet);
+            foreach (DataRow dr in it.Tables[0].Rows)
+            {
+                items.Add(dr[0] + " " + dr[1]);
+            }
+            return items;
+
+
+        }
+
 
 
 

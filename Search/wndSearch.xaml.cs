@@ -32,6 +32,10 @@ namespace GroupProject_WpfApp.Search
         //selected invoice
         internal invoice selectedInvoice = null;
         clsSearchLogic logicClass;
+        //lineItems list
+        internal List<String> lineItems;
+        //items list
+        internal List<String> ItemList;
         #endregion
 
         /// <summary>
@@ -135,6 +139,17 @@ namespace GroupProject_WpfApp.Search
         private void Search_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void setItems()
+        {
+            foreach (String item in ItemList)
+            {
+                ListBoxItem newItem = new ListBoxItem();
+                newItem.MouseLeftButtonUp += selectCall;
+                newItem.Content = item;
+                InvoiceListBox.Items.Add(newItem);
+            }
         }
     }
 }
