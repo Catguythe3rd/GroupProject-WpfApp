@@ -40,7 +40,9 @@ namespace GroupProject_WpfApp.Search
             window.searchedInvoices.Clear();
             //These are the search arguements
             ComboBoxItem date = new ComboBoxItem();
+            date.Content = "NO";
             ComboBoxItem charge = new ComboBoxItem();
+            charge.Content = "nata";
             int invoiceNumber = 0;
 
             //these three statements are setting the previous objects equal to the arguements, if applicable
