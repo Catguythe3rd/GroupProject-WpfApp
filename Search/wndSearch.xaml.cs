@@ -44,10 +44,10 @@ namespace GroupProject_WpfApp.Search
             InitializeComponent();
             //set the parent
             this.parent = parent;
-            //call list that sets invoices to the listbox
-            setInvoices(invoices,true);
             //set value to logic class
             logicClass = new clsSearchLogic(this);
+            //call list that sets invoices to the listbox
+            setInvoices(invoices,true);
         }
 
         /// <summary>
