@@ -140,7 +140,7 @@ namespace GroupProject_WpfApp.Search
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-
+            logicClass.searchInvoice();
         }
 
         private void setItems()
@@ -150,7 +150,7 @@ namespace GroupProject_WpfApp.Search
                 ListBoxItem newItem = new ListBoxItem();
                 newItem.MouseLeftButtonUp += selectCall;
                 newItem.Content = item;
-                InvoiceListBox.Items.Add(newItem);
+                ItemListBox.Items.Add(newItem);
             }
         }
     }
