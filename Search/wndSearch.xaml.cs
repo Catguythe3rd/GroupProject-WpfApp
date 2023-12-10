@@ -156,7 +156,7 @@ namespace GroupProject_WpfApp.Search
             foreach (String item in ItemList)
             {
                 ListBoxItem newItem = new ListBoxItem();
-                newItem.MouseLeftButtonUp += itemSelected;
+                newItem.MouseDoubleClick += itemSelected;
                 newItem.Content = item;
                 ItemListBox.Items.Add(newItem);
             }
