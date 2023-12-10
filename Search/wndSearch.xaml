@@ -20,7 +20,7 @@
 
         <ComboBox x:Name="dateDropDown" Margin="626,138,54,0" VerticalAlignment="Top" Width="120"/>
 
-        <Button Content=" Clear " HorizontalAlignment="Left" Margin="491,389,0,0" VerticalAlignment="Top"/>
+        <Button Content=" Clear " HorizontalAlignment="Left" Margin="491,389,0,0" VerticalAlignment="Top" Click="Clear_Click"/>
         <Button x:Name="search" Content=" Search " HorizontalAlignment="Left" Margin="588,389,0,0" VerticalAlignment="Top" Click="Search_Click"/>
         <ComboBox Name="TotalChargesComboBox" Margin="626,183,77,203"/>
 

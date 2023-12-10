@@ -36,7 +36,6 @@ namespace GroupProject_WpfApp.Search
         /// </summary>
         public void searchInvoice()
         {
-            InvoiceListBox.Items.Clear();
             //We need to clear the searchedInvoices list so that we are not retainign invoices from old searches
             window.searchedInvoices.Clear();
             //These are the search arguements
