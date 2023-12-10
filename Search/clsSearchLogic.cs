@@ -3,43 +3,96 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace GroupProject_WpfApp.Search
 {
     internal class clsSearchLogic{
+        wndSearch window;
+        public clsSearchLogic(wndSearch window)
+        {
+            //initiate the parent window
+            this.window = window;
+            clsSearchSQL database = new clsSearchSQL();
+            //set the invoice list equal to the retrieved DB list
+            window.invoices = database.getInvoices();
+            window.lineItems = database.getLineItems();
+            window.ItemList = database.getItems();
+        }
 
+        /// <summary>
+        /// Taking in the arguements offered from the search parameters, the program will search for any invoices that have the same attributes.
+        /// Does not need all of the arguements to be offered to run this program, as it will simply not find any invoice with an attribute equal to
+        /// nothing.
+        /// </summary>
         public void searchInvoice()
         {
-            //this method will actually search the invoices list using the attributes supplied from the UI. Will probably make a sub-list that will
-            //be built in a loop that will grab all invoices that match the required attributes. This method will probably need some overrides, so
-            //that the user is not required to supply all of the requested details every single time. This will allow me to return lists as long as
-            //all of them, and as short as only one. Then, it will be returned and displayed in the UI.
+            //We need to clear the searchedInvoices list so that we are not retainign invoices from old searches
+            window.searchedInvoices.Clear();
+            //These are the search arguements
+            ComboBoxItem date = new ComboBoxItem();
+            ComboBoxItem charge = new ComboBoxItem();
+            int invoiceNumber = 0;
+
+            //these three statements are setting the previous objects equal to the arguements, if applicable
+            if (window.dateDropDown.SelectedItem != null)
+            {
+                date = window.dateDropDown.SelectedItem as ComboBoxItem;
+            }
+            if (window.TotalChargesComboBox.SelectedItem != null)
+            {
+                charge = window.TotalChargesComboBox.SelectedItem as ComboBoxItem;
+            }
+            int.TryParse(window.numberInput.Text, out invoiceNumber);
+
+
+            foreach (invoice invoice in window.invoices)
+            {
+                //does the invoice have the same date?
+                if (invoice.getDate().ToString() == date.Content.ToString())
+                {
+                    window.searchedInvoices.Add(invoice);
+                }
+                //does the invoice have the same invoice number?
+                else if (invoice.getNumber() == invoiceNumber)
+                {
+                    window.searchedInvoices.Add(invoice);
+                }
+                //does the invoice have the same totalCharge?
+                else if (invoice.getTotal().ToString() == charge.Content.ToString())
+                {
+                    window.searchedInvoices.Add(invoice);
+                }
+                window.setInvoices(window.searchedInvoices, false);
+            }
         }
 
-        public void editInvoice()
-        {
-            //The UI will supply some data from a pop-up form for editing an invouice, this method will find it in the list and DB and apply the neseccary changes
-        }
 
-        public void getInvoiceNumbers()
-        {
-            //this will supply the invoice numbers to the UI using a list
-        }
 
-        public void getInvoiceTotals()
+        /// <summary>
+        /// Called by the window class on a listbox item click to find the selected invoice
+        /// </summary>
+        internal void selectInvoice(object sender)
         {
-            //this wll supply the invoice totals to the UI using a list
-        }
-
-        public void getInvoiceDate()
-        {
-            //this will supply the invoice dates to the UI using a list
-        }
-
-        public void getInvoiceList()
-        {
-            //this important method will supply the actual list of invoices themselves for alterationa and display.
-            //This will come straight from the clsSearchSQL class
-        }
+            //instantiate the sender as a listboxitem
+            ListBoxItem selection = sender as ListBoxItem;
+            //iterate through the invoices
+            foreach (invoice invoice in window.invoices)
+            {
+                //compare the string of the invoice to the string of the sender
+                if ("#" + invoice.getNumber() + ", " + invoice.getDate() + ", " + invoice.getTotal() == selection.Content)
+                {
+                    //if true, set the selectedInvoice equal to that invoice
+                    window.selectedInvoice = invoice;
+                }
+            }
+        } 
     }
 }

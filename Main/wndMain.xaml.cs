@@ -66,6 +66,7 @@ namespace GroupProject_WpfApp.Main
             try
             {
                 this.Hide();
+                itemWindow = new wndItems(this);
                 itemWindow.ShowDialog();
                 this.Show();
                 if (itemID != null && newI == true) ItemsList.Items.Add(itemID);
@@ -89,6 +90,7 @@ namespace GroupProject_WpfApp.Main
             try
             {
                 this.Hide();
+                searchWindow = new wndSearch(this);
                 searchWindow.ShowDialog();
                 this.Show();
                 //catch invoice id

@@ -103,35 +103,5 @@ namespace GroupProject_WpfApp.Items
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
             }
         }
-
-        private void newItem()
-        {
-            // create new item object with passed in variables, 
-            // set selected item to the new item in list.
-        }
-
-        private void saveItem()
-        {
-            // Take in selected item or its values like name, cost, and description,
-            // then call sql function to update selected item with values.
-        }
-
-        private void upArrow()
-        {
-            // iterate up through list, store the selected item in some sort of variable.
-        }
-
-        private void downArrow()
-        {
-            // iterate down through list, store the selected item in some sort of variable.
-        }
-
-        void deleteItem()
-        {
-            // From commonly missed items - Items
-            //  - When deleting an item on the def table form,
-            //  a requirement says “Instead warn them with a message that tells the user which invoices that item is used on.”.
-            //  Your message doesn’t tell which invoices it is on.
-        }
     }
 }

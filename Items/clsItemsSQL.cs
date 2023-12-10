@@ -57,7 +57,7 @@ namespace GroupProject_WpfApp.Items
             {
                 string SQLString = "Update ItemDesc Set ItemDesc = '" + itemDescription +
                                     "', Cost = " + cost + 
-                                    "where ItemCode = '" + itemCode + "'";
+                                    " where ItemCode = '" + itemCode + "'";
                 dataBase.ExecuteNonQuery(SQLString);
             }
             catch (Exception ex)
