@@ -6,30 +6,30 @@
         xmlns:local="clr-namespace:GroupProject_WpfApp.Search"
         mc:Ignorable="d"
         Title="wndSearch" Height="450" Width="800">
-    <Grid>
+    <Grid Background="RoyalBlue">
         <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Black" VerticalAlignment="Top" Width="800" Margin="0,48,0,0"/>
-        <Label Content="Search" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" Height="40" Width="62"/>
+        <Label  Foreground="Gold" Content="Search" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" Height="40" Width="87" FontSize="20" FontWeight="Bold"/>
         <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="31,85,578,35" Foreground="#FFAD2E2E">
-            <ListBox Name="InvoiceListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
+            <ListBox Name="InvoiceListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Wheat"  BorderBrush="#FF2146B5">
 
             </ListBox>
         </ScrollViewer>
-        <Label Content="Invoice Number:" HorizontalAlignment="Left" Margin="491,85,0,0" VerticalAlignment="Top"/>
-        <Label Content="Invoice Date:" HorizontalAlignment="Left" Margin="491,136,0,0" VerticalAlignment="Top"/>
+        <Label  Foreground="Gold" Content="Invoice Number:" HorizontalAlignment="Left" Margin="491,85,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label  Foreground="Gold" Content="Invoice Date:" HorizontalAlignment="Left" Margin="491,136,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <TextBox x:Name="numberInput" HorizontalAlignment="Left" Margin="626,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
-        <ComboBox x:Name="dateDropDown" Margin="626,138,54,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <ComboBox x:Name="dateDropDown" Margin="626,138,54,0" VerticalAlignment="Top" Width="120"/>
 
         <Button Content=" Clear " HorizontalAlignment="Left" Margin="491,389,0,0" VerticalAlignment="Top"/>
         <Button x:Name="search" Content=" Search " HorizontalAlignment="Left" Margin="588,389,0,0" VerticalAlignment="Top" Click="Search_Click"/>
-            <ComboBox Name="TotalChargesComboBox" Margin="626,183,77,203"/>
+        <ComboBox Name="TotalChargesComboBox" Margin="626,183,77,203"/>
 
-        <Label Content="Total Charges" HorizontalAlignment="Left" Margin="491,181,0,0" VerticalAlignment="Top"/>
+        <Label  Foreground="Gold" Content="Total Charges" HorizontalAlignment="Left" Margin="491,181,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <ScrollViewer Background ="black" BorderBrush="#FF5076B3"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" Margin="620,254,72,71" Foreground="#FFAD2E2E">
-            <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="#FF733A3A" BorderBrush="#FF2146B5">
+            <ListBox Name="ItemListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Wheat" BorderBrush="#FF2146B5">
             </ListBox>
         </ScrollViewer>
-        <Label Content="Items: " HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top"/>
-        <Label Content="INVOICES: " HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top"/>
+        <Label Foreground="Gold" Content="Items: " HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label  Foreground="Gold" Content="INVOICES: " HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
     </Grid>
 </Window>
