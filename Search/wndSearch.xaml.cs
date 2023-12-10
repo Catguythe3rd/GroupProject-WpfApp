@@ -52,6 +52,8 @@ namespace GroupProject_WpfApp.Search
             logicClass = new clsSearchLogic(this);
             //call list that sets invoices to the listbox
             setInvoices(invoices,true);
+            //set items to the item listbox
+            setItems();
         }
 
         /// <summary>
